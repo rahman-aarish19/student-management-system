@@ -118,7 +118,11 @@ body {
     width: 200px;
 }
 
-form button[type="submit"] {
+.form-signin button[type="submit"],
+.form-signup button[type="submit"],
+.form-add-student button[type="submit"],
+.form-edit-course button[type="submit"],
+.form-fee-mgmt button[type="submit"] {
     height: 55px;
     background: #7CBB00;
     color: #fff;
@@ -138,9 +142,27 @@ form button[type="submit"] {
     width: 150px;
 }
 
-form button[type="submit"]:hover,
-form button[type="submit"]:focus,
-form button[type="submit"]:active {
+.form-signin button[type="submit"]:hover,
+.form-signup button[type="submit"]:hover,
+.form-add-student button[type="submit"]:hover,
+.form-edit-course button[type="submit"]:hover,
+.form-fee-mgmt button[type="submit"]:hover {
+    background: #88cc00;
+}
+
+.form-signin button[type="submit"]:focus,
+.form-signup button[type="submit"]:focus,
+.form-add-student button[type="submit"]:focus,
+.form-edit-course button[type="submit"]:focus,
+.form-fee-mgmt button[type="submit"]:focus {
+    background: #88cc00;
+}
+
+.form-signin button[type="submit"]:active,
+.form-signup button[type="submit"]:active,
+.form-add-student button[type="submit"]:active,
+.form-edit-course button[type="submit"]:active,
+.form-fee-mgmt button[type="submit"]:active {
     background: #88cc00;
 }
 
@@ -322,15 +344,29 @@ select:valid:focus {
 }
 
 .form-signin {
-    max-width: 500px;
-    margin: 200px auto;
+    max-width: 600px;
+    margin: 180px auto;
     background: #fff;
-    padding: 35px 35px;
+    padding: 45px 35px;
 }
 
 .form-signin h3,
 .form-signin h6 {
     text-align: left;
+}
+
+.form-signin h6 {
+    margin-top: -7px;
+}
+
+.form-signin a {
+    color: #7CBB00;
+    outline: none;
+    text-decoration: none;
+}
+
+.form-signin input {
+    height: 55px;
 }
 
 input[type="email"]:focus,
@@ -661,6 +697,7 @@ tbody::-webkit-scrollbar-thumb {
 
 .custom-alert {
     padding: 20px;
+    padding-bottom: 15px;
 }
 
 /* Animations to fade the snackbar in and out */
@@ -1000,4 +1037,37 @@ ul#menu li a {
 
 .bootbox-class .btn-modal {
     width: 100px;
+}
+
+/* Users */
+
+.media-user-requests {
+    background: #7CBB00;
+    padding: 30px;
+    color: #fff;
+    border-radius: 4px;
+    line-height: 5px;
+}
+
+.media-user-requests button {
+    background: #fff;
+    color: #7CBB00;
+    height: 50px;
+}
+
+.card-request {
+    padding: 0 !important;
+    background: #fff;
+    border: none;
+    box-shadow: 0px 4px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+.card-request p {
+    line-height: 10px;
+}
+
+.card-request button[type="submit"],
+.card-request a.btn-delete {
+    width: 50px;
+    height: 50px;
 }
