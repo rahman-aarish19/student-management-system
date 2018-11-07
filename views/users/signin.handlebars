@@ -1,0 +1,32 @@
+<form action="/" method="POST" class="form-signin needs-validation" novalidate>
+    <h3>Sign in to the Dashboard</h3>
+    <h6>Please enter your credentials</h6>
+    <hr style="margin-top:25px;margin-bottom:25px;">
+    <div class="form-group">
+        <label for="formGroupExampleInput">Email</label>
+        <input type="email" class="form-control" name="email" placeholder="Enter email" required autocomplete="off">
+        <div class="invalid-feedback">
+            Please enter a valid email.
+        </div>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Password</label>
+        <input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" name="password"
+            placeholder="Enter password" required autocomplete="off">
+        <div class="invalid-feedback">
+            Please enter a password.
+        </div>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+        <small id="passwordHelpBlock" class="form-text text-muted">
+            Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces,
+            special characters,
+            or emoji.
+        </small>
+    </div>
+    <button type="submit" class="btn btn-default btn-block btn-lg">Sign in</button>
+</form>

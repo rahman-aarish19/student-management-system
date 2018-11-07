@@ -1,0 +1,51 @@
+{{#each errors}}
+<!--div class="alert alert-danger">{{text}}</div-->
+<div id="snackbar-error">
+    <i class="fa fa-exclamation-circle fa-4x" aria-hidden="true"></i>
+    <p>
+        <strong>Oh snap! </strong>{{text}}
+    </p>
+    <span onclick="this.parentElement.style.display='none';">&times</span>
+</div>
+
+<script>
+    function myFunction() {
+        // Get the snackbar DIV
+        var x = document.getElementById("snackbar-error");
+
+        // Add the "show" class to DIV
+        x.className = "show";
+
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
+    }
+    myFunction();
+</script>
+
+{{/each}}
+
+{{#if success_message}}
+<!--div class="alert alert-danger">{{text}}</div-->
+<div id="snackbar">
+    <i class="fa fa-check-circle fa-4x" aria-hidden="true"></i>
+    <p>
+        <strong>Success! </strong>{{success_message}}
+    </p>
+    <span onclick="this.parentElement.style.display='none';">&times</span>
+</div>
+
+<script>
+    function myFunction() {
+        // Get the snackbar DIV
+        var x = document.getElementById("snackbar");
+
+        // Add the "show" class to DIV
+        x.className = "show";
+
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
+    }
+    myFunction();
+</script>
+
+{{/if}}

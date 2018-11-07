@@ -1,0 +1,19 @@
+{{#if breadcrumbs}}
+<ol class="breadcrumb" style="text-transform:capitalize;">
+    <li>
+        <i class="fa fa-home"></i>&nbsp;
+    </li>
+    {{#each breadcrumb}} {{#unless @last}}
+    <li>
+        <a href="{{this.url}}">
+            <span>{{this.label}}</span>
+        </a>
+        <span>&nbsp; / &nbsp;</span>
+    </li>
+    {{else}}
+    <li>
+        <span>{{this.label}}</span>
+    </li>
+    {{/unless}} {{/each}}
+</ol>
+{{/if}}

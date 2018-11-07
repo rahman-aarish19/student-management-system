@@ -1,0 +1,28 @@
+<div class="container">
+    <h4 class="lead mb-3">
+        Uploaded Images.
+    </h4>
+
+    {{#if images}}
+    <div class="row">
+        {{#each images}}
+        <!--img src="/uploads/files/{{filename}}" alt="" style="width:100px;"-->
+        <div class="col-md-3 mb-3">
+            <div class="card" style="width: 100%;">
+                <img class="card-img-top" src="/uploads/files/{{filename}}" alt="No image found." style="width:100%;height:200px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{caption}}</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's
+                        content.</p>
+                    <form action="/uploads/{{id}}?_method=DELETE" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger btn-block">Delete Image</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+</div>

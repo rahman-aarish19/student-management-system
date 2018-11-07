@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    {{#if success_msg}}
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-top:-6px;">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="media">
+            <i class="fa fa-check-circle fa-4x m-auto" aria-hidden="true"></i>
+            <div class="media-body ml-4">
+                <h5 class="mt-0">
+                    <strong>Successfull !</strong>
+                </h5>
+                <strong>{{success_msg}} Now you can continue.</strong>
+            </div>
+        </div>
+    </div>
+    {{/if}} {{#if error_msg}}
+    <div class="alert alert-denger">
+        <button type="button" class="close" data-dismiss="alert" style="margin-top:-6px;">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="media">
+            <i class="fa fa-exclamation-circle fa-4x m-auto"></i>
+            <div class="media-body ml-4">
+                <h5 class="mt-0">
+                    <strong>Oops, you've got an error!</strong>
+                </h5>
+                {{error_msg}}. Change a few things up and try submitting again.
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>
+
+<script>
+    (function () {
+        setTimeout(function () {
+            $(".alert").alert('close');
+        }, 5000);
+    })();
+</script>

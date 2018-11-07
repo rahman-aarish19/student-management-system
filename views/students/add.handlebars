@@ -1,0 +1,257 @@
+<div class="container-fluid" id="container-fluid">
+    <form class="form-add-student needs-validations" action="/students/add" method="POST" style="z-index:1;" novalidate>
+        {{#each errors}}
+        <div class="alert alert-danger custom-alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-top:0px;">
+                <span aria-hidden="true" style="color:white;">&times;</span>
+            </button>
+            <div class="media">
+                <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
+                <div class="media-body ml-4 mt-1">
+                    <strong>{{text}}.</strong>&nbsp;&nbsp;Change a few things up and try submitting again.
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        <fieldset>
+            <h4>Personal Detail's</h4>
+            <p>Enter personal detail's of the student.</p>
+            <hr>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="firstname">First Name ( <span>*</span> )</label>
+                    <input type="text" class="form-control" value="{{body.FirstName}}" name="FirstName" placeholder="First Name"
+                        required autocomplete="off">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="lastname">Last Name ( <span>*</span> )</label>
+                    <input type="text" class="form-control" value="{{body.LastName}}" name="LastName" placeholder="Last Name"
+                        required autocomplete="off">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="gender">Gender ( <span>*</span> )</label>
+                    <select name="Gender" class="form-control custom-select" required>
+                        {{#select body.Gender}}
+                        <option value="">Choose...</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        {{/select}}
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="category">Category ( <span>*</span> )</label>
+                    <select name="Category" class="form-control custom-select" required autocomplete="off">
+                        {{#select body.Category}}
+                        <option value="">Choose...</option>
+                        <option value="General">General</option>
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                        <option value="OBC">OBC</option>
+                        <option value="Others">Others</option>
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="dateOfBirth">Date Of Birth ( <span>*</span> )</label>
+                    <input id="datepicker" type="text" value="{{body.DateOfBirth}}" class="form-control" name="DateOfBirth"
+                        placeholder="Day / Month / Year" required autocomplete="off">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dateOfAdmission">Date Of Admission ( <span>*</span> )</label>
+                    <input id="datepicker2" type="text" value="{{body.DateOfAdmission}}" class="form-control" name="DateOfAdmission"
+                        placeholder="Day / Month / Year" required autocomplete="off">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="religion">Religion ( <span>*</span> )</label>
+                    <select name="Religion" class="form-control custom-select" required autocomplete="off">
+                        {{#select body.Religion}}
+                        <option value="">Choose...</option>
+                        <option value="Muslim">Muslim</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Sikh">Sikh</option>
+                        <option value="Christian">Christian</option>
+                        <option value="Jain">Jain</option>
+                        <option value="Others">Others</option>
+                        {{/select}}
+                    </select>
+                </div>
+
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <h4>Parent Detail's</h4>
+            <p>Enter parent detail's of the student.</p>
+            <hr>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="fathersName">Father's Name ( <span>*</span> )</label>
+                    <input type="text" value="{{body.FathersName}}" name="FathersName" class="form-control" placeholder="Father's Name"
+                        required autocomplete="off">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="fathersEduQuali">Father's Educational Qualification ( <span>*</span> )</label>
+                    <input type="text" name="FathersEducationalQualification" value="{{body.FathersEducationalQualification}}"
+                        class="form-control" placeholder="Father's Educational Qualification" required autocomplete="off">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="fathersOccupation">Father's Occupation ( <span>*</span> )</label>
+                    <input type="text" name="FathersOccupation" value="{{body.FathersOccupation}}" class="form-control"
+                        placeholder="Father's Occupation" required autocomplete="off">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="mothersName">Mother's Name ( <span>*</span> )</label>
+                    <input type="text" name="MothersName" value="{{body.MothersName}}" class="form-control" placeholder="Mother's Name"
+                        required autocomplete="off">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="mothersEduQuali">Mother's Educational Qualification ( <span>*</span> )</label>
+                    <input type="text" name="MothersEducationalQualification" value="{{body.MothersEducationalQualification}}"
+                        class="form-control" placeholder="Mother's Educational Qualification" required autocomplete="off">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="mothersOccupation">Mother's Occupation ( <span>*</span> )</label>
+                    <input type="text" name="MothersOccupation" value="{{body.MothersOccupation}}" class="form-control"
+                        placeholder="Mother's Occupation" required autocomplete="off">
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <h4>Contact Detail's</h4>
+            <p>Enter contact detail's of the student.</p>
+            <hr>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="emailAddress">Email Address ( <span>*</span> )</label>
+                    <input type="email" name="Email" value="{{body.Email}}" class="form-control" placeholder="Email Address"
+                        required autocomplete="off">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="phoneNumber">Phone Number ( <span>*</span> )</label>
+                    <input type="text" name="PhoneNumber" value="{{body.PhoneNumber}}" class="form-control" placeholder="Phone Number"
+                        required autocomplete="off">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="address">Address ( <span>*</span> )</label>
+                    <input type="text" name="Address" value="{{body.Address}}" class="form-control" placeholder="1234, main street"
+                        required autocomplete="off">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="city">City ( <span>*</span> )</label>
+                    <input type="text" name="City" value="{{body.City}}" class="form-control" placeholder="City"
+                        required autocomplete="off">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="state">State ( <span>*</span> )</label>
+                    <input type="text" name="State" value="{{body.State}}" class="form-control" placeholder="State"
+                        required autocomplete="off">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="postalCode">Postal Code ( <span>*</span> )</label>
+                    <input type="text" name="PostalCode" value="{{body.PostalCode}}" class="form-control" placeholder="Postal Code"
+                        required autocomplete="off">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="country">Country ( <span>*</span> )</label>
+                    <input type="text" name="Country" value="{{body.Country}}" class="form-control" placeholder="Country"
+                        required autocomplete="off">
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <h4>Course Detail's</h4>
+            <p>Enter course detail's of the student.</p>
+            <hr>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="">Course Name ( <span>*</span> )</label>
+                    <!--input type="text" name="CourseName" value="{{body.CourseName}}" class="form-control" placeholder="Enter Course Name"-->
+                    <select name="CourseName" id="chooseDept" class="form-control custom-select" onchange="getCourses(this.value);">
+                        <option value="">Choose...</option>
+                        {{#each dept}}
+                        <option value="{{dname}}">{{dname}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">Branch / Specialization ( <span>*</span> )</label>
+                    <!--input type="text" name="BranchName" value="{{body.BranchName}}" class="form-control" placeholder="Enter Course Name"-->
+                    <select name="BranchName" id="course" class="form-control custom-select">
+                        <option value="">Choose...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="Class">Class Admitted To ( <span>*</span> )</label>
+                    <select name="ClassAdmittedTo" class="form-control custom-select" required>
+                        {{#select body.ClassAdmittedTo}}
+                        <option value="">Choose...</option>
+                        <option value="1st Semester">1st Semester</option>
+                        <option value="2nd Semester">2nd Semester</option>
+                        <option value="3rd Semester">3rd Semester</option>
+                        <option value="4th Semester">4th Semester</option>
+                        <option value="5th Semester">5th Semester</option>
+                        <option value="6th Semester">6th Semester</option>
+                        <option value="7th Semester">7th Semester</option>
+                        <option value="8th Semester">8th Semester</option>
+                        {{/select}}
+                    </select>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="Section">Section ( <span>*</span> )</label>
+                    <select name="Section" class="form-control custom-select" required>
+                        {{#select body.Section}}
+                        <option value="">Choose...</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        {{/select}}
+                    </select>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="Session">Session ( <span>*</span> )</label>
+                    <input type="text" name="Session" value="{{body.Session}}" class="form-control" placeholder="Session"
+                        required autocomplete="off">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="ClassRollNo">Class Roll No ( <span>*</span> )</label>
+                    <input type="text" name="ClassRollNo" value="{{body.ClassRollNo}}" class="form-control" placeholder="Class Roll No"
+                        required autocomplete="off">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="RegistrationNo">Registration No</label>
+                    <input type="text" name="RegistrationNo" value="{{body.RegistrationNo}}" class="form-control"
+                        placeholder="Registration No" autocomplete="off">
+                </div>
+            </div>
+        </fieldset>
+
+        <p>
+            <button type="submit" class="btn btn-default btn-block btn-lg">Save Details &nbsp;
+                <i class="fa fa-paper-plane fa-lg"></i>
+            </button>
+        </p>
+    </form>
+</div>

@@ -1,0 +1,59 @@
+<div class="container-fluid" id="container-fluid">
+    <form action="/courses/{{course.id}}?_method=PUT" method="POST" class="form-edit-course needs-validation"
+        novalidate>
+        <input type="hidden" name="_method" value="PUT">
+        <h4>Edit Course</h4>
+        <hr>
+        <div class="form-group">
+            <label for="departmentName">Department</label>
+            <select name="departmentName" class="form-control custom-select" required>
+                {{#select course.departmentName}}
+                {{#each dept}}
+                <option value="{{dname}}">{{dname}}</option>
+                {{/each}}
+                {{/select}}
+
+            </select>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <label for="courseName">Course Name</label>
+                <input type="text" name="courseName" class="form-control" value="{{course.courseName}}" placeholder="Course Name"
+                    required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="courseDuration">Duration (in years)</label>
+                <input type="text" name="courseDuration" class="form-control" value="{{course.courseDuration}}"
+                    placeholder="Duration" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="startDate">Start Date</label>
+                <input type="text" id="datepicker" class="form-control" value="{{course.startDate}}" name="startDate"
+                    required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="endDate">End Date</label>
+                <input type="text" id="datepicker2" class="form-control" value="{{course.endDate}}" name="endDate"
+                    required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="courseFee">Course Fee (Per Semester)</label>
+                <input type="text" name="courseFee" class="form-control" value="{{course.courseFee}}" placeholder="Course Fee"
+                    required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="intake">Intake (No. of Seats)</label>
+                <input type="text" name="intake" class="form-control" value="{{course.intake}}" placeholder="No. Of seats"
+                    required>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default btn-lg btn-block">Update &nbsp;&nbsp;
+            <i class="fa fa-pencil fa-lg"></i>
+        </button>
+
+    </form>
+</div>

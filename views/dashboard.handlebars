@@ -1,0 +1,131 @@
+<div class="container-fluid" id="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item active">
+                    <a href="/students">Students</a>
+                </li>
+                <li class="list-group-item" onmouse>
+                    <a href="/students" onmouseover="animate();">Teachers</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="/courses">Courses</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="/students">Attendance</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="/students">Marks &amp; Grades</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="/fee-management">Fee Management</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="/students">Users</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card text-center" style="border-radius:0px;background:red;color:#fff;">
+                        <div class="card-body">
+                            <div class="media">
+                                <i class="fa fa-graduation-cap fa-4x"></i>
+                                <div class="media-body">
+                                    <h5 class="mt-0">Students</h5>
+                                    <h3>800</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#">Know more &nbsp;
+                                <span class="fa fa-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card text-center" style="border-radius:0px;background:#512da8;color:#fff;">
+                        <div class="card-body">
+                            <div class="media">
+                                <i class="fa fa-group fa-4x"></i>
+                                <div class="media-body">
+                                    <h5 class="mt-0">Faculties</h5>
+                                    <h3>90</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#">Know more &nbsp;
+                                <span class="fa fa-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card text-center" style="border-radius:0px;background:#ffb74d;color:#fff;">
+                        <div class="card-body">
+                            <div class="media">
+                                <i class="fa fa-credit-card fa-4x"></i>
+                                <div class="media-body">
+                                    <h5 class="mt-0">Fees Pending</h5>
+                                    <h3>362000+</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#">Know more &nbsp;
+                                <span class="fa fa-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card text-center" style="border-radius:0px;background:#7CBB00;color:#fff;">
+                        <div class="card-body">
+                            <div class="media">
+                                <i class="fa fa-graduation-cap fa-4x"></i>
+                                <div class="media-body">
+                                    <h5 class="mt-0">Requests</h5>
+                                    <h3>0</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#">Know more &nbsp;
+                                <span class="fa fa-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div id="salesChartContainer" style="height: 370px; width: 100%;"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function hover(element, img1) {
+        element.childNodes[1].setAttribute('src', `/img/logos/${img1}.png`);
+    }
+
+    function unhover(element, img2) {
+        element.childNodes[1].setAttribute('src', `/img/logos/${img2}.png`);
+    }
+
+    function animate() {
+        let list = document.getElementsByClassName('list-group-item');
+        list.style.background = 'yellow';
+    }
+</script>

@@ -1,0 +1,342 @@
+<div class="container-fluid" id="container-fluid">
+    {{#if student}}
+    <div class="card view-card mb-3">
+        <div class="card-body">
+            <h4>Manage Profile</h4>
+            <hr>
+            <p>Help us get to know you better. Use the options below to create your profile manually, or import it from
+                your resume or LinkedIn profile. Updates made to your profile will also be reflected in existing
+                applications.
+
+            </p>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="#">
+                        <button type="button" class="btn btn-info" style="width:100%"><i class="fa fa-file-pdf-o fa-lg"></i>&nbsp;
+                            Export to PDF</button>
+                    </a>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="#">
+                        <button type="button" class="btn btn-info" style="width:100%"><i class="fa fa-pencil-square-o fa-lg"></i>&nbsp;Edit
+                            Profile</button>
+                    </a>
+                </div>
+
+                <div class="col-md-3">
+                    <!--a href="#"-->
+                    <button type="button" data-toggle="modal" data-target="#studentDetailsModal" class="btn btn-info"
+                        style="width:100%"><i class="fa fa-print fa-lg"></i>&nbsp;Print</button>
+                    <!--/a-->
+                </div>
+
+                <div class="col-md-3">
+                    <a href="#">
+                        <button type="button" class="btn btn-info" style="width:100%"><i class="fa fa-trash fa-lg"></i>&nbsp;Delete</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card view-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-9">
+                    <h4 class="display-5 mt-3">Student Detail's</h4>
+                </div>
+                <div class="col-md-3">
+                    <a href="/students/edit?id={{student.id}}" class="btn btn-secondary">
+                        <i class="fa fa-pencil"></i>Edit &nbsp;
+                    </a>
+                    <a href="#" class="btn btn-danger delete-item" data-id="/students/{{student.id}}">
+                        <i class="fa fa-trash"></i>&nbsp; Delete
+                    </a>
+                    <!--form action="/students/details/{{student.id}}?_method=DELETE" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger">
+                            Delete &nbsp;<i class="fa fa-trash"></i>
+                        </button>
+                    </form-->
+                </div>
+            </div>
+
+            <hr>
+
+            <h5 class="card-title">Personal Detail's</h5>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="">Student Name</label>
+                    <p>{{student.StudentName.FirstName}}&nbsp;{{student.StudentName.LastName}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Gender</label>
+                    <p>{{student.Gender}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Category</label>
+                    <p>{{student.Category}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="">Date Of Birth</label>
+                    <p>{{student.DateOfBirth}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Date Of Admission</label>
+                    <p>{{student.DateOfAdmission}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Religion</label>
+                    <p>{{student.Religion}}</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <h5 class="card-title">Parent / Guardian Detail's</h5>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="">Father's Name</label>
+                    <p>{{student.FathersName}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Father's Educational Qualification</label>
+                    <p>{{student.FathersEducationalQualification}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Father's Occupation</label>
+                    <p>{{student.FathersOccupation}}</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="">Mother's Name</label>
+                    <p>{{student.MothersName}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Mother's Educational Qualification</label>
+                    <p>{{student.MothersEducationalQualification}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Mother's Occupation</label>
+                    <p>{{student.MothersOccupation}}</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <h5 class="card-title">Contact Detail's</h5>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="">Email Address</label>
+                    <p>{{student.Email}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Phone Number</label>
+                    <p>{{student.PhoneNumber}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Address</label>
+                    <p>{{student.Address.Address_Line_1}},&nbsp;{{student.Address.City}},&nbsp;{{student.Address.State}},&nbsp;{{student.Address.PostalCode}},&nbsp;{{student.Address.Country}}</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <h5 class="card-title">Class Detail's</h5>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="">Course Name</label>
+                    <p>{{student.CourseName}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Branch Name</label>
+                    <p>{{student.BranchName}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="">Class Admitted To</label>
+                    <p>{{student.Class}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Section</label>
+                    <p>{{student.Section}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Session</label>
+                    <p>{{student.Session}}</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="">Class Roll Number</label>
+                    <p>{{student.StudentId.ClassRollNo}}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Registration Number</label>
+                    <p>{{student.StudentId.RegistrationNo}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{/if}}
+</div>
+
+<!-- Student Details Modal -->
+<div id="studentDetailsModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="printPreview" class="modal-body">
+                <div id="studentDetails" style="border:5px double #000;padding:20px;">
+                    <h5 class="card-title">Personal Detail's</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="">Student Name</label>
+                            <p>{{student.StudentName.FirstName}}&nbsp;{{student.StudentName.LastName}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Gender</label>
+                            <p>{{student.Gender}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Category</label>
+                            <p>{{student.Category}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="">Date Of Birth</label>
+                            <p>{{student.DateOfBirth}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Date Of Admission</label>
+                            <p>{{student.DateOfAdmission}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Religion</label>
+                            <p>{{student.Religion}}</p>
+                        </div>
+                    </div>
+
+
+
+                    <h5 class="card-title">Parent / Guardian Detail's</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="">Father's Name</label>
+                            <p>{{student.FathersName}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Father's Educational Qualification</label>
+                            <p>{{student.FathersEducationalQualification}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Father's Occupation</label>
+                            <p>{{student.FathersOccupation}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="">Mother's Name</label>
+                            <p>{{student.MothersName}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Mother's Educational Qualification</label>
+                            <p>{{student.MothersEducationalQualification}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Mother's Occupation</label>
+                            <p>{{student.MothersOccupation}}</p>
+                        </div>
+                    </div>
+
+
+
+                    <h5 class="card-title">Contact Detail's</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="">Email Address</label>
+                            <p>{{student.Email}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Phone Number</label>
+                            <p>{{student.PhoneNumber}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Address</label>
+                            <p>{{student.Address.Address_Line_1}},&nbsp;{{student.Address.City}},&nbsp;{{student.Address.State}},&nbsp;{{student.Address.PostalCode}},&nbsp;
+                                {{student.Address.Country}}</p>
+                        </div>
+                    </div>
+
+
+
+                    <h5 class="card-title">Class Detail's</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="">Course Name</label>
+                            <p>{{student.CourseName}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Branch Name</label>
+                            <p>{{student.BranchName}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="">Class Admitted To</label>
+                            <p>{{student.Class}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Section</label>
+                            <p>{{student.Section}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Session</label>
+                            <p>{{student.Session}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="">Class Roll Number</label>
+                            <p>{{student.StudentId.ClassRollNo}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Registration Number</label>
+                            <p>{{student.StudentId.RegistrationNo}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnPrints" onclick="printPage('printPreview');" class="btn btn-secondary">
+                    <i class="fa fa-print fa-lg"></i> &nbsp; Print Page
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

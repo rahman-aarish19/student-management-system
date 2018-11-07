@@ -1,0 +1,106 @@
+<div class="container-fluid" id="make-payment">
+    <form class="form-fee-mgmt" action="" method="POST">
+        {{#each errors}}
+        <div class="alert alert-danger custom-alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-top:0px;">
+                <span aria-hidden="true" style="color:white;">&times;</span>
+            </button>
+            <div class="media">
+                <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
+                <div class="media-body ml-4 mt-1">
+                    <strong>{{text}}.</strong>&nbsp;&nbsp;Change a few things up and try submitting again.
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        <div class="form-row">
+            <div class="col-md-9">
+                <h4>Fee Entry For Students</h4>
+                <p style="line-height: 10px;">Fields marked with (<span style="color:red;"> * </span>) are mandatory.</p>
+            </div>
+            <div class="col-md-3">
+                <h4>Receipt No:</h4>
+                {{#if paymentId}}
+                <p>{{paymentId}}</p>
+                <input type="hidden" name="paymentId" value="{{paymentId}}">
+                {{else}}
+                <p>{{body.paymentId}}</p>
+                <input type="hidden" name="paymentId" value="{{body.paymentId}}">
+                {{/if}}
+            </div>
+        </div>
+
+        <hr>
+        <h3>Step 1</h3>
+        <p>Student details</p>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="">Class Roll Number ( <span>*</span> )</label>
+                <input type="text" name="studentRoll" id="studentRoll" value="{{body.studentRoll}}" onchange="getStudentInfo(this.value);"
+                    class="form-control" placeholder="Enter Class Roll Number">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Name ( <span>*</span> )</label>
+                <input type="text" name="studentName" id="studentName" value="{{body.studentName}}" class="form-control"
+                    placeholder="Enter Student's Full Name">
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="">Class ( <span>*</span> )</label>
+                <input type="text" name="studentClass" id="studentClass" value="{{body.studentClass}}" class="form-control"
+                    placeholder="Enter Class Studying In">
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="">Section ( <span>*</span> )</label>
+                <input type="text" name="studentSection" id="studentSection" value="{{body.studentSection}}" class="form-control"
+                    placeholder="Enter Student's Section">
+            </div>
+        </div>
+
+        <hr>
+
+        <h3>Step 2</h3>
+        <p>Select course, class and section.</p>
+        <div class="form row">
+            <div class="form-group col-md-6">
+                <label for="">Department ( <span>*</span> )</label>
+                <input type="text" name="studentDept" id="studentDept" value="{{body.studentDept}}" class="form-control"
+                    placeholder="Enter Department">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="">Course ( <span>*</span> )</label>
+                <input type="text" name="studentCourse" id="studentCourse" value="{{body.studentCourse}}" class="form-control"
+                    placeholder="Enter Course">
+            </div>
+        </div>
+
+        <hr>
+
+        <h3>Step 3</h3>
+        <p>Enter amount and due date.</p>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="">Paid Amount ( <span>*</span> )</label>
+                <input type="text" name="amountPaid" value="{{body.amountPaid}}" class="form-control" placeholder="Enter amount paid">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Due Amount ( <span>*</span> )</label>
+                <input type="text" name="amountDue" value="{{body.amountDue}}" class="form-control" placeholder="Enter amount due">
+                <p class="text-muted mt-2">Enter 0 if no dues.</p>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Due date</label>
+                <input type="text" id="datepicker" name="dueDate" value="{{body.dueDate}}" class="form-control"
+                    placeholder="Enter amount paid">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Late Submission Fine ( &#8377 Per Day )</label>
+                <input type="text" name="lateFine" value="{{body.lateFine}}" class="form-control" placeholder="Enter late submission fine">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default btn-lg btn-block">Submit Fee</button>
+    </form>
+</div>

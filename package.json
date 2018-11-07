@@ -1,0 +1,28 @@
+{
+  "name": "student_management_system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "express-url-breadcrumb": "0.0.8",
+    "faker": "^4.1.0",
+    "joi": "^13.4.0",
+    "method-override": "^2.3.10",
+    "moment": "^2.22.2",
+    "mongoose": "^5.2.1",
+    "mongoose-paginate": "^5.0.3",
+    "multer": "^1.4.1",
+    "randomstring": "^1.1.5"
+  }
+}
