@@ -4,18 +4,13 @@ const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const path = require('path');
 const fs = require('fs');
 const breadcrumb = require('express-url-breadcrumb');
 const multer = require('multer');
 
 const app = express();
-
-// Connecting to MongoDB...
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/student-mgmt-sys', {
-    useNewUrlParser: true
-}).then(() => console.log('Connected to MongoDB Server...')).catch(err => console.error('Error occured connecting to MongoDB...', err));
 
 // Load Routes
 const students = require('./routes/students');
@@ -24,6 +19,17 @@ const courses = require('./routes/courses');
 const fees = require('./routes/fee-mgmt');
 const api = require('./routes/api');
 const uploads = require('./routes/uploads');
+
+// Passport Config.
+require('./config/passport')(passport);
+
+// Connecting to MongoDB...
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/student-mgmt-sys', {
+    useNewUrlParser: true
+}).then(() => console.log('Connected to MongoDB Server...')).catch(err => console.error('Error occured connecting to MongoDB...', err));
+
+
 
 // Load Helpers
 const {
@@ -67,6 +73,10 @@ app.use(session({
     saveUninitialized: true
 }));
 
+// Passport Middleware.
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash());
 
 // Global Variables
@@ -74,6 +84,7 @@ app.use(function (req, res, next) {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
     next();
 });
 

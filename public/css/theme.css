@@ -5,7 +5,19 @@ body {
 }
 
 .container-fluid {
-    width: 95%;
+    width: 90%;
+}
+
+.dropdown-header {
+    background: #fff;
+    color: #000;
+    line-height: 10px;
+    margin-bottom: 5px;
+    padding: 5px 30px;
+}
+
+.dropdown-header h6 {
+    margin-top: 10px;
 }
 
 /* Globals */
@@ -258,12 +270,12 @@ input[type="date"] {
     box-shadow: none;
 }
 
-/* Dropdown */
+/* Dropdown 
 .dropdown-menu {
     border-radius: 0px;
     padding: 10px;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 150px;
 }
 
 .dropdown-menu .dropdown-item {
@@ -273,7 +285,7 @@ input[type="date"] {
 .dropdown-menu .dropdown-item:hover {
     background: #7CBB00;
     color: #fff;
-}
+}*/
 
 #dropdown-custom .dropdown-item {
     outline: none;
@@ -345,7 +357,7 @@ select:valid:focus {
 
 .form-signin {
     max-width: 600px;
-    margin: 180px auto;
+    margin: 150px auto;
     background: #fff;
     padding: 45px 35px;
 }
@@ -514,13 +526,17 @@ input[type="date"]:focus,
     .navbar .nav-item .dropdown-menu {
         margin-top: 15px;
         border-radius: 0px;
-        padding: 10px;
+        padding-bottom: 10px;
     }
 
     .navbar .nav-item .dropdown-menu .dropdown-item {
         padding: 10px;
         padding-right: 140px;
         padding-left: 20px;
+        /*width: 90%;
+        color: #fff;
+        margin-left: 10px;
+        margin-right: 10px;*/
         color: #fff;
     }
 
@@ -670,6 +686,7 @@ tbody::-webkit-scrollbar-thumb {
 /* Snackbar Alert */
 .alert-denger,
 .alert-success {
+    min-width: 420px;
     max-width: 420px;
     height: auto;
     margin-left: -125px;
@@ -682,7 +699,8 @@ tbody::-webkit-scrollbar-thumb {
     left: 15%;
     bottom: 30px;
     border: none;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0px 4px 15px -5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 4px 15px -5px rgba(0, 0, 0, 0.3);
     -webkit-animation: fadein 0.5s, fadeout 0.5s 5s !important;
     animation: fadein 0.5s, fadeout 0.5s 5s !important;
 }
@@ -692,7 +710,8 @@ tbody::-webkit-scrollbar-thumb {
 }
 
 .alert-success {
-    background: #7CBB00;
+    background: #4a148c;
+    border: 2px solid #ba68c8;
 }
 
 .custom-alert {
@@ -1066,8 +1085,8 @@ ul#menu li a {
     line-height: 10px;
 }
 
-.card-request button[type="submit"],
-.card-request a.btn-delete {
-    width: 50px;
-    height: 50px;
+.card-request button[type="submit"] {
+    width: 48px;
+    height: 43px;
+    border: none;
 }

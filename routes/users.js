@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 const router = express.Router();
 
 const moment = require('moment');
@@ -76,12 +77,29 @@ router.get('/signin', (req, res) => {
     });
 });
 
+// Signin Route
+
+router.post('/signin', (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/users/signin',
+        failureFlash: true
+    })(req, res, next);
+});
+
 router.get('/signup', (req, res) => {
     res.render('users/signup', {
         title: 'Sign up',
         breadcrumbs: false,
         layout: 'signin'
     })
+});
+
+// Logout Route
+router.get('/signout', (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'You have successfully signed out of the application.');
+    res.redirect('/users/signin');
 });
 
 router.post('/signup', async (req, res) => {

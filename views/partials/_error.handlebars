@@ -6,3 +6,18 @@
     </div>
 </div>
 {{/if}}
+
+{{#if error}}
+<div class="alert alert-danger alert-dismissible fade show custom-alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="media">
+        <i class="fa fa-exclamation-triangle fa-3x" aria-hidden="true"></i>
+        <div class="media-body ml-4">
+            <h6 class="mt-2" style="line-height:5px;"><strong>{{error}}</strong></h6>
+            Change a few things up and try submitting again.
+        </div>
+    </div>
+</div>
+{{/if}}

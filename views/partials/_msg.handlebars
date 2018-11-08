@@ -8,9 +8,9 @@
             <i class="fa fa-check-circle fa-4x m-auto" aria-hidden="true"></i>
             <div class="media-body ml-4">
                 <h5 class="mt-0">
-                    <strong>Successfull !</strong>
+                    <strong>Success Message !</strong>
                 </h5>
-                <strong>{{success_msg}} Now you can continue.</strong>
+                {{success_msg}}
             </div>
         </div>
     </div>
@@ -30,6 +30,25 @@
         </div>
     </div>
     {{/if}}
+
+    <!--
+    {{#if error}}
+    <div class="alert alert-denger">
+        <button type="button" class="close" data-dismiss="alert" style="margin-top:-6px;">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="media">
+            <i class="fa fa-exclamation-circle fa-4x m-auto"></i>
+            <div class="media-body ml-4">
+                <h5 class="mt-0">
+                    <strong>{{error}}</strong>
+                </h5>
+                Change a few things up and try submitting again.
+            </div>
+        </div>
+    </div>
+    {{/if}}
+    -->
 </div>
 
 <script>
