@@ -1,5 +1,8 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
+        {{#if user}}
+        <a href="#menu-toggle" class="mr-5" id="menu-toggle"><i class="fa fa-bars fa-lg"></i></a>
+        {{/if}}
         <!-- Brand -->
         <a class="navbar-brand" href="/">
             <img src="/img/git.svg" width="30" height="30" class="d-inline-block align-top" alt="">&nbsp;&nbsp;
@@ -25,11 +28,6 @@
                         {{user.email}} <i class="fa fa-angle-down fa-lg"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-left bg-primary">
-                        <div class="dropdown-header">
-                            <h6>Signed in as <strong>{{user.name}}</strong></h6>
-                            <p>Profile : {{user.role}}</p>
-                        </div>
-
                         <a class="dropdown-item" href="#">
                             <i class="fa fa-cogs fa-lg"></i>&nbsp; Settings
                         </a>
@@ -40,17 +38,13 @@
                 </li>
                 {{else}}
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/signin">Sign in</a>
+                    <a class="btn btn-success" href="/users/signin">Sign in</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/signup">Sign up</a>
+                    <a class="btn btn-outline-secondary" href="/users/signup">Sign up</a>
                 </li>
                 {{/if}}
             </ul>
-            <!--img src="/img/logos/icons/avatar.png" width="30" height="30" class="d-inline-block align-top" alt="">
-            <span class="navbar-text ml-2">
-                Aarish Rahman
-            </span-->
         </div>
     </div>
 </nav>

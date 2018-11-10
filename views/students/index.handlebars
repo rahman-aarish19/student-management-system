@@ -29,7 +29,57 @@
     </div>
 
     {{#if students}}
-    <table class="table custom-table table-striped table-sm">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Roll Number</th>
+                <th scope="col">Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Date Of Admission</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Address</th>
+                <th scope="col">Class Admitted To</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each students}}
+            <tr>
+                <td>{{StudentId.ClassRollNo}}</td>
+                <td>{{StudentName.FirstName}}&nbsp;{{StudentName.LastName}}</td>
+                <td>{{Gender}}</td>
+                <td>{{DateOfAdmission}}</td>
+                <td>{{PhoneNumber}}</td>
+                <td>{{Address.Address_Line_1}}</td>
+                <td>{{Class}}</td>
+                <td>
+                    <div class="dropdown" id="customized-dropdown">
+                        <button type="button" class="btn btn-default" data-toggle="dropdown">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right animated fadeIn">
+                            <li>
+                                <a class="dropdown-item" href="/students/edit?id={{id}}">
+                                    Edit
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/students/details?id={{id}}">
+                                    View
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-item delete-item" data-id="/students/{{id}}">Delete</a>
+                            </li>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <!--table class="table custom-table table-striped table-sm">
         <thead class="thead-dark">
             <tr>
                 <th class="col-width-5" style="padding-left:10px;">
@@ -97,7 +147,7 @@
                                     <button type="submit" class="dropdown-item">
                                         Delete
                                     </button>
-                                </form-->
+                                </form>
                             </li>
                         </div>
                     </div>
@@ -106,7 +156,7 @@
             {{/each}}
         </tbody>
     </table>
-    <p>Showing {{skip}} - {{to}} of {{total}}</p>
+    <p>Showing {{skip}} - {{to}} of {{total}}</p-->
 
     <br>
 
@@ -139,10 +189,13 @@
                         <div class="input-group mb-3">
                             <div class="custom-file">
                                 <input type="file" name="importcsv" class="custom-file-input" id="inputGroupFile02">
-                                <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                                <label class="custom-file-label" for="inputGroupFile02">Choose
+                                    file</label>
                             </div>
-                            <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help
-                                text for the above input. It's a bit lighter and easily wraps to a new line.
+                            <small id="fileHelp" class="form-text text-muted">This is some
+                                placeholder block-level help
+                                text for the above input. It's a bit lighter and easily wraps
+                                to a new line.
                             </small>
 
                         </div>

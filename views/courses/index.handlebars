@@ -1,6 +1,51 @@
 <div class="container-fluid" id="container-fluid">
     {{#if course}}
-    <table class="table custom-table table-striped table-sm">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" style="padding-left:20px;">Course Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">Course Duration</th>
+                <th scope="col">Starts</th>
+                <th scope="col">Ends</th>
+                <th scope="col">Course Fee</th>
+                <th scope="col">Intake</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each course}}
+            <tr>
+                <td style="padding-left:20px;">{{courseName}}</td>
+                <td>{{departmentName}}</td>
+                <td>{{courseDuration}}</td>
+                <td>{{startDate}}</td>
+                <td>{{endDate}}</td>
+                <td>{{courseFee}}</td>
+                <td>{{intake}}</td>
+                <td>
+                    <div class="dropdown" id="customized-dropdown">
+                        <button type="button" class="btn btn-default" data-toggle="dropdown">
+                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right animated fadeIn">
+                            <li>
+                                <a class="dropdown-item" href="/courses/edit?id={{id}}">
+                                    Edit
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-item delete-item" data-id="/courses/{{id}}">Delete</a>
+                            </li>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <!--table class="table custom-tables table-striped table-sm">
         <thead class="thead-dark">
             <tr>
                 <th class="col-width-15" style="padding-left:20px;">Course Name</th>
@@ -41,7 +86,7 @@
                                     <button type="submit" class="dropdown-item">
                                         Delete
                                     </button>
-                                </form-->
+                                </form>
                             </li>
                         </div>
                     </div>
@@ -49,7 +94,7 @@
             </tr>
             {{/each}}
         </tbody>
-    </table>
+    </table-->
 
     {{/if}}
 </div>

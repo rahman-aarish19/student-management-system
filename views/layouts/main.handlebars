@@ -18,24 +18,25 @@
 </head>
 
 <body>
-    {{> _nav}}
-    <section style="width:100%;height:70px;padding:11px;margin-top:20px;margin-bottom:10px;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-3">
-                    {{> _breadcrumbs}}
+    <div id="wrapper">
+        {{> _sidebar}} {{> _nav}}
+        <div id="page-content-wrapper">
+            <section style="width:100%;height:70px;padding:11px;margin-top:0px;margin-bottom:10px;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            {{> _breadcrumbs}}
+                        </div>
+                        <div class="col-md-9">
+                            {{> _search-bar}}
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-9">
-                    {{> _search-bar}}
-                </div>
-            </div>
+            </section>
+
+            {{> _msg}} {{> _error}} {{{body}}}
         </div>
-    </section>
 
-    {{> _msg}} {{> _error}} {{{body}}}
-
-    <div class="cssload-container" id="cssload-container">
-        <div class="cssload-double-torus"></div>
     </div>
 
     <!--script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -51,6 +52,15 @@
     <script src="/js/custom.js"></script>
     <script src="/js/ajaxMethods.js"></script>
     <script src="/js/charts.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+            $('.sidebar-nav').addClass('icon-bar');
+        });
+    </script>
 
 </body>
 

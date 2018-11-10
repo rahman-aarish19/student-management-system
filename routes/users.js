@@ -11,65 +11,16 @@ const {
     confirmPassword
 } = require('../models/user');
 
-router.get('/', (req, res) => {
-    res.render('users/index', {
-        title: 'Users',
-        breadcrumbs: true
-    });
-});
+const {
+    ensureAuthenticated,
+    isAdmin,
+    isLoggedIn
+} = require('../helpers/auth');
 
-router.get('/requests', async (req, res) => {
-    const requests = await User.find({
-        request: false
-    });
+// Public Routes.
 
-    if (requests) {
-        res.render('users/requests', {
-            title: 'Requests',
-            breadcrumbs: true,
-            requests: requests
-        });
-    } else {
-        res.render('users/requests', {
-            title: 'Requests',
-            breadcrumbs: true
-        });
-    }
-});
-
-router.put('/requests/:id', async (req, res) => {
-    const result = await User.updateOne({
-        _id: req.params.id
-    }, {
-        $set: {
-            request: true
-        }
-    });
-
-    if (result) {
-        req.flash('success_msg', 'Registration approved!');
-        res.redirect('/users/requests');
-    } else {
-        req.flash('error_msg', 'Opps! Something went wrong.');
-        res.redirect('/users/requests');
-    }
-});
-
-router.delete('/requests/:id', async (req, res) => {
-    const result = await User.deleteOne({
-        _id: req.params.id
-    });
-
-    if (result) {
-        req.flash('success_msg', 'Request deleted successfully!');
-        res.send('/users/requests');
-    } else {
-        req.flash('error_msg', 'Opps! Something went wrong.');
-        res.redirect('/users/requests');
-    }
-});
-
-router.get('/signin', (req, res) => {
+// GET Signin Route.
+router.get('/signin', isLoggedIn, (req, res) => {
     res.render('users/signin', {
         title: 'Please Sign in',
         breadcrumbs: false,
@@ -77,9 +28,8 @@ router.get('/signin', (req, res) => {
     });
 });
 
-// Signin Route
-
-router.post('/signin', (req, res, next) => {
+// POST Signin Route.
+router.post('/signin', isLoggedIn, (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/users/signin',
@@ -87,7 +37,15 @@ router.post('/signin', (req, res, next) => {
     })(req, res, next);
 });
 
-router.get('/signup', (req, res) => {
+// Signout Route
+router.get('/signout', (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'You have successfully signed out of the application.');
+    res.redirect('/users/signin');
+});
+
+// GET Signup Route.
+router.get('/signup', isLoggedIn, (req, res) => {
     res.render('users/signup', {
         title: 'Sign up',
         breadcrumbs: false,
@@ -95,14 +53,8 @@ router.get('/signup', (req, res) => {
     })
 });
 
-// Logout Route
-router.get('/signout', (req, res) => {
-    req.logout();
-    req.flash('success_msg', 'You have successfully signed out of the application.');
-    res.redirect('/users/signin');
-});
-
-router.post('/signup', async (req, res) => {
+// POST Signup Route.
+router.post('/signup', isLoggedIn, async (req, res) => {
     let errors = [];
 
     const {
@@ -176,16 +128,82 @@ router.post('/signup', async (req, res) => {
                 });
             });
         }
+    }
+});
 
-        /*    const result = await user.save();
 
-            if (user) {
-                req.flash('success_msg', 'Registration successfull');
-                res.redirect('/users/signin');
-            } else {
-                req.flash('error_msg', 'Opps! Something went wrong...');
-                res.redirect('/users/signup');
-            }*/
+
+// Protected Routes.
+
+router.get('/', [ensureAuthenticated, isAdmin], (req, res) => {
+    res.render('users/index', {
+        title: 'Users',
+        breadcrumbs: true
+    });
+});
+
+router.get('/requests', [ensureAuthenticated, isAdmin], async (req, res) => {
+    const requests = await User.find({
+        request: false
+    });
+
+    if (requests) {
+        res.render('users/requests', {
+            title: 'Requests',
+            breadcrumbs: true,
+            requests: requests
+        });
+    } else {
+        res.render('users/requests', {
+            title: 'Requests',
+            breadcrumbs: true
+        });
+    }
+});
+
+router.put('/requests/:id', [ensureAuthenticated, isAdmin], async (req, res) => {
+    const result = await User.updateOne({
+        _id: req.params.id
+    }, {
+        $set: {
+            request: true
+        }
+    });
+
+    if (result) {
+        req.flash('success_msg', 'Registration approved!');
+        res.redirect('/users/requests');
+    } else {
+        req.flash('error_msg', 'Opps! Something went wrong.');
+        res.redirect('/users/requests');
+    }
+});
+
+router.delete('/requests/:id', [ensureAuthenticated, isAdmin], async (req, res) => {
+    const result = await User.deleteOne({
+        _id: req.params.id
+    });
+
+    if (result) {
+        req.flash('success_msg', 'Request deleted successfully!');
+        res.send('/users/requests');
+    } else {
+        req.flash('error_msg', 'Opps! Something went wrong.');
+        res.redirect('/users/requests');
+    }
+});
+
+router.get('/edit', async (req, res) => {
+    const result = await User.findOne({
+        _id: req.query.id
+    });
+
+    if (result) {
+        res.render('users/edit', {
+            title: 'Edit User',
+            breadcrumbs: true,
+            result: result
+        });
     }
 });
 

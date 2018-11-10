@@ -36,5 +36,12 @@ module.exports = {
     },
     select: function (selected, options) {
         return options.fn(this).replace(new RegExp(' value=\"' + selected + '\"'), '$&selected="selected"').replace(new RegExp('>' + selected + '</option>'), 'selected="selected"$&');
+    },
+    if_eq: function (a, b, c, d, opts) {
+        if (a == b || c == d) {
+            return opts.fn(this);
+        } else {
+            return opts.inverse(this);
+        }
     }
 }

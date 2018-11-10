@@ -34,8 +34,13 @@ mongoose.connect('mongodb://localhost:27017/student-mgmt-sys', {
 // Load Helpers
 const {
     paginate,
-    select
+    select,
+    if_eq
 } = require('./helpers/customHelpers');
+
+const {
+    ensureAuthenticated
+} = require('./helpers/auth');
 
 // Express Handlebars Middleware.
 
@@ -43,7 +48,8 @@ app.engine('handlebars', exphbs({
     defaultLayout: 'main',
     helpers: {
         paginate: paginate,
-        select: select
+        select: select,
+        if_eq: if_eq
     }
 }));
 
@@ -85,11 +91,12 @@ app.use(function (req, res, next) {
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
     res.locals.user = req.user || null;
+    //res.locals.isAdmin = req.user.isAdmin || null;
     next();
 });
 
 // Home Route
-app.get('/', (req, res) => {
+app.get('/', [ensureAuthenticated], (req, res) => {
     //console.log(req.originalUrl);
     res.render('dashboard', {
         title: 'Dashboard',

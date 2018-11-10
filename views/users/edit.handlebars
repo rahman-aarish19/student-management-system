@@ -1,0 +1,82 @@
+<div class="container-fluid">
+    <form action="/users/signup" method="POST" class="form-edit-user">
+
+        {{#each errors}}
+        <div class="alert alert-danger alert-dismissible fade show custom-alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="media">
+                <i class="fa fa-exclamation-triangle fa-3x" aria-hidden="true"></i>
+                <div class="media-body ml-4">
+                    <h6 class="mt-2" style="line-height:5px;"><strong>{{text}}</strong></h6>
+                    Change a few things up and try submitting again.
+                </div>
+            </div>
+        </div>
+        {{/each}}
+
+        <h3>Edit user account</h3>
+
+        <hr>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Full Name</label>
+                <input type="text" class="form-control" name="name" value="{{result.name}}" placeholder="Full Name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="name">Email Address</label>
+                <input type="email" class="form-control" name="email" value="{{result.email}}" placeholder="Personal Email">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="designation">Profile</label>
+                <select name="role" class="form-control custom-select">
+                    {{#select result.role}}
+                    <option value="">Choose...</option>
+                    <option value="Teacher">Teacher</option>
+                    <option value="Principal">Principal</option>
+                    <option value="Accountant">Accountant</option>
+                    {{/select}}
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="name">Is Admin</label>
+                <select name="isAdmin" class="form-control custom-select">
+                    {{#select result.isAdmin}}
+                    <option value="">Choose...</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12 text-center">
+                <label for="Password">Access Level</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="r" id="inlineCheckbox" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox">Read Only Access</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="r" id="inlineCheckbox2" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">Read and Write Access</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="r" id="inlineCheckbox3" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox3">Read, Write and Delete Access</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <button type="submit" class="btn btn-default btn-lg btn-block" style="margin-bottom:10px;">Edit User</button>
+            <!--p class="m-auto">OR</p>
+        <a href="#" class="google-signin">
+            <img src="/img/g-signin.svg" alt="">&nbsp; Sign in with Google
+        </a-->
+        </div>
+    </form>
+</div>

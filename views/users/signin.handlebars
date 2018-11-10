@@ -1,5 +1,7 @@
-<form action="/users/signin" method="POST" class="form-signin needs-validations" novalidate>
+<form action="/users/signin" method="POST" class="form-signin">
+
     {{#if error}}
+
     <div class="alert alert-danger alert-dismissible fade show custom-alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="">
             <span aria-hidden="true">&times;</span>
@@ -12,7 +14,9 @@
             </div>
         </div>
     </div>
+
     {{/if}}
+
     <div class="media">
         <img class="mr-4" src="/img/logos/icons/padlock.png" width="60" alt="Generic placeholder image" style="margin-top:-7px;">
         <div class="media-body">
@@ -22,27 +26,21 @@
     </div>
 
     <hr style="margin-top:25px;margin-bottom:25px;">
+
     <div class="form-group">
         <label for="formGroupExampleInput">Email</label>
-        <input type="email" class="form-control" name="email" placeholder="Enter email" required autocomplete="off">
-        <div class="invalid-feedback">
-            Please enter a valid email.
-        </div>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
+        <input type="email" class="form-control" name="email" placeholder="Enter email" autocomplete="off" autofocus>
     </div>
+
     <div class="form-group">
         <label for="formGroupExampleInput2">Password</label>
-        <input type="password" class="form-control" name="password" placeholder="Enter password" required autocomplete="off">
-        <div class="invalid-feedback">
-            Please enter a password.
-        </div>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
+        <input type="password" class="form-control" name="password" placeholder="Enter password" autocomplete="off">
     </div>
+
     <button type="submit" class="btn btn-default btn-block btn-lg mt-4">Sign in</button>
     <p class="text-center mt-4">Don't have an account? Create one <a href="/users/signup">here</a></p>
-    <p class="text-center" style="margin-top:-20px;"><a href="#">Forgot Password?</a></p>
+    <p class="text-center" style="margin-top:-20px;">
+        <a href="#">Forgot Password?</a>
+    </p>
+
 </form>

@@ -1,0 +1,56 @@
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+            <a href="#">
+                <img src="/img/logos/icons/rocket.png" alt="">&nbsp;&nbsp; Strapi.ai
+            </a>
+        </li>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
+            <span>Go to</span>
+        </h6>
+        <li>
+            <a href="/"> Dashboard</a>
+        </li>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
+            <span>Academics</span>
+        </h6>
+
+        {{#if user.isAdmin}}
+        <li>
+            <a href="/students"> Students <i class="fa fa-angle-right"></i></a>
+        </li>
+        <li>
+            <a href="/courses">Courses <i class="fa fa-angle-right"></i></a>
+        </li>
+        {{/if}}
+
+        {{#if_eq user.role "Accountant" user.isAdmin true}}
+        <li>
+            <a href="/fee-management">Fee Management <i class="fa fa-angle-right"></i></a>
+        </li>
+        {{/if_eq}}
+
+        {{#if_eq user.role "Teacher" user.isAdmin true}}
+        <li>
+            <a href="#">Attendance <i class="fa fa-angle-right"></i></a>
+        </li>
+        <li>
+            <a href="#">Marks And Grades <i class="fa fa-angle-right"></i></a>
+        </li>
+        {{/if_eq}}
+
+        {{#if user.isAdmin}}
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
+            <span>Users</span>
+        </h6>
+        <li>
+            <a href="/users">Users <i class="fa fa-angle-right"></i></a>
+        </li>
+        <li>
+            <a href="#">Faculties <i class="fa fa-angle-right"></i></a>
+        </li>
+        {{/if}}
+    </ul>
+</div>
+<!-- /#sidebar-wrapper -->

@@ -23,6 +23,9 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    operations: {
+        type: Array
+    },
     created: {
         type: String,
         required: true
