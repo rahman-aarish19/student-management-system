@@ -32,6 +32,19 @@ function msg() {
     });
 }
 
+function alertMsg(message) {
+
+    bootbox.alert({
+        size: "medium",
+        closeButton: false,
+        message: message,
+        className: 'bootbox-prompt',
+        callback: function () {
+            window.location.href = '/dashboard';
+        }
+    });
+}
+
 $(document).ready(function () {
     $('#btnGroup').hide();
     $('#btnDel').hide();
@@ -74,6 +87,7 @@ $(document).ready(function () {
     $('.delete-item').on('click', function (e) {
         $target = $(e.target);
         const id = $target.attr('data-id');
+        const access_id = $target.attr('access-id');
 
         bootbox.confirm({
             message: "Are you sure you want to delete this item? This can't be undone.",
@@ -89,7 +103,7 @@ $(document).ready(function () {
             },
             className: 'bootbox-class',
             callback: function (result) {
-                if (result == true) {
+                if (result == true && access_id == true) {
                     const URL = id;
                     $.ajax({
                         type: 'DELETE',
@@ -103,6 +117,9 @@ $(document).ready(function () {
                             console.log(err);
                         }
                     });
+                } else {
+                    //alert('You do not have the necessary permissions to perform this action.');
+                    alertMsg('You do not have the necessary permissions to perform this action.');
                 }
             }
         });

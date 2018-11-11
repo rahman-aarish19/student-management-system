@@ -17,14 +17,29 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         required: true,
-        enum: ['Accountant', 'Teacher', 'Principal']
+        enum: ['Accountant', 'Teacher', 'Principal', 'Administrator']
     },
     isAdmin: {
         type: Boolean,
         required: true
     },
-    operations: {
-        type: Array
+    privileges: {
+        read: {
+            type: Boolean,
+            default: false
+        },
+        create: {
+            type: Boolean,
+            default: false
+        },
+        update: {
+            type: Boolean,
+            default: false
+        },
+        delete: {
+            type: Boolean,
+            default: false
+        }
     },
     created: {
         type: String,

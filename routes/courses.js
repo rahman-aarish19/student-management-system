@@ -9,6 +9,15 @@ const {
     validateCourse
 } = require('../models/course');
 
+const {
+    ensureAuthenticated,
+    isAdmin,
+    readAccessControl,
+    createAccessControl,
+    updateAccessControl,
+    deleteAccessControl
+} = require('../helpers/auth');
+
 router.get('/getCourse/:deptName', async (req, res) => {
     const course = await Course.find({
         departmentName: req.params.deptName
@@ -23,7 +32,7 @@ router.get('/getCourse/:deptName', async (req, res) => {
         res.status(400).send(error.details[0].message);
 });
 
-router.get('/', async (req, res) => {
+router.get('/', [ensureAuthenticated, isAdmin, readAccessControl], async (req, res) => {
 
     const dept = await Department.find();
     const course = await Course.find();
@@ -49,7 +58,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/add', async (req, res) => {
+router.get('/add', [ensureAuthenticated, isAdmin, createAccessControl], async (req, res) => {
     const dept = await Department.find();
 
     if (dept) {
@@ -61,7 +70,7 @@ router.get('/add', async (req, res) => {
     }
 });
 
-router.post('/add', async (req, res) => {
+router.post('/add', [ensureAuthenticated, isAdmin, createAccessControl], async (req, res) => {
     let errors = [];
     const dept = await Department.find();
 
@@ -124,7 +133,7 @@ router.post('/add', async (req, res) => {
     }
 });
 
-router.get('/edit', async (req, res) => {
+router.get('/edit', [ensureAuthenticated, isAdmin, updateAccessControl], async (req, res) => {
     const dept = await Department.find();
     const course = await Course.findOne({
         _id: req.query.id
@@ -140,7 +149,7 @@ router.get('/edit', async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', [ensureAuthenticated, isAdmin, updateAccessControl], async (req, res) => {
     let startDate = moment(req.body.startDate).format('LL');
     let endDate = moment(req.body.endDate).format('LL');
 
@@ -167,7 +176,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [ensureAuthenticated, isAdmin, deleteAccessControl], async (req, res) => {
     const result = await Course.remove({
         _id: req.params.id
     });

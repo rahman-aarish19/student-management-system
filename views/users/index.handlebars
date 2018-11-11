@@ -19,4 +19,44 @@
             </div>
         </div>
     </div>
+
+    <table class="table table-striped mt-5">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">IsAdmin</th>
+                <th scope="col">Access Privileges</th>
+                <th scope="col">Date Created</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{email}}</td>
+                <td>{{role}}</td>
+                <td>{{isAdmin}}</td>
+                <td>Create: {{privileges.create}}, Read: {{privileges.read}}, Update: {{privileges.update}}, Delete:
+                    {{privileges.delete}}</td>
+                <td>{{created}}</td>
+                <td>
+                    <div class="dropdown" id="customized-dropdown">
+                        <button class="btn btn-secondary" type="button" data-toggle="dropdown">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right animated fadeIn">
+                            <a class="dropdown-item" href="#">Edit</a>
+                            <a class="dropdown-item" href="#">View</a>
+                            <a class="dropdown-item delete-item" data-id="/users/{{id}}" path="/users" access-id="{{privileges.delete}}"
+                                href="#">Delete</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
 </div>

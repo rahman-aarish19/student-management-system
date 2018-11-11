@@ -14,7 +14,11 @@ const {
 const {
     ensureAuthenticated,
     isAdmin,
-    isLoggedIn
+    isLoggedIn,
+    readAccessControl,
+    createAccessControl,
+    updateAccessControl,
+    deleteAccessControl
 } = require('../helpers/auth');
 
 // Public Routes.
@@ -31,14 +35,15 @@ router.get('/signin', isLoggedIn, (req, res) => {
 // POST Signin Route.
 router.post('/signin', isLoggedIn, (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/dashboard',
+        successFlash: true,
         failureRedirect: '/users/signin',
         failureFlash: true
     })(req, res, next);
 });
 
 // Signout Route
-router.get('/signout', (req, res) => {
+router.get('/signout', [ensureAuthenticated], (req, res) => {
     req.logout();
     req.flash('success_msg', 'You have successfully signed out of the application.');
     res.redirect('/users/signin');
@@ -135,11 +140,45 @@ router.post('/signup', isLoggedIn, async (req, res) => {
 
 // Protected Routes.
 
-router.get('/', [ensureAuthenticated, isAdmin], (req, res) => {
-    res.render('users/index', {
-        title: 'Users',
-        breadcrumbs: true
+router.get('/', [ensureAuthenticated, isAdmin], async (req, res) => {
+    const users = await User.find({
+        request: true
+    }).select({
+        name: 1,
+        email: 1,
+        role: 1,
+        created: 1,
+        isAdmin: 1,
+        'privileges.read': 1,
+        'privileges.create': 1,
+        'privileges.update': 1,
+        'privileges.delete': 1,
+        _id: 1
     });
+
+    if (users) {
+        res.render('users/index', {
+            title: 'Users',
+            breadcrumbs: true,
+            users: users
+        });
+    } else {
+        res.render('users/index', {
+            title: 'Users',
+            breadcrumbs: true
+        });
+    }
+});
+
+router.delete('/:id', [ensureAuthenticated, isAdmin, deleteAccessControl], async (req, res) => {
+    const result = await User.remove({
+        _id: req.params.id
+    });
+
+    if (result) {
+        req.flash('success_msg', 'Record deleted successfully.');
+        res.send('/users');
+    }
 });
 
 router.get('/requests', [ensureAuthenticated, isAdmin], async (req, res) => {
@@ -161,7 +200,7 @@ router.get('/requests', [ensureAuthenticated, isAdmin], async (req, res) => {
     }
 });
 
-router.put('/requests/:id', [ensureAuthenticated, isAdmin], async (req, res) => {
+router.put('/requests/:id', [ensureAuthenticated, isAdmin, updateAccessControl], async (req, res) => {
     const result = await User.updateOne({
         _id: req.params.id
     }, {
@@ -179,7 +218,7 @@ router.put('/requests/:id', [ensureAuthenticated, isAdmin], async (req, res) => 
     }
 });
 
-router.delete('/requests/:id', [ensureAuthenticated, isAdmin], async (req, res) => {
+router.delete('/requests/:id', [ensureAuthenticated, isAdmin, deleteAccessControl], async (req, res) => {
     const result = await User.deleteOne({
         _id: req.params.id
     });
@@ -193,7 +232,9 @@ router.delete('/requests/:id', [ensureAuthenticated, isAdmin], async (req, res) 
     }
 });
 
-router.get('/edit', async (req, res) => {
+
+// Edit User Account.
+router.get('/edit', [ensureAuthenticated, isAdmin, updateAccessControl], async (req, res) => {
     const result = await User.findOne({
         _id: req.query.id
     });
@@ -204,6 +245,31 @@ router.get('/edit', async (req, res) => {
             breadcrumbs: true,
             result: result
         });
+    }
+});
+
+router.put('/edit/:id', [ensureAuthenticated, isAdmin, updateAccessControl], async (req, res) => {
+    const result = await User.update({
+        _id: req.params.id
+    }, {
+        $set: {
+            name: req.body.name,
+            email: req.body.email,
+            role: req.body.role,
+            isAdmin: req.body.isAdmin,
+            'privileges.read': req.body.read,
+            'privileges.create': req.body.create,
+            'privileges.update': req.body.update,
+            'privileges.delete': req.body.delete
+        }
+    });
+
+    if (result) {
+        req.flash('success_msg', 'User account created successfully.');
+        res.redirect('/users/requests');
+    } else {
+        req.flash('error_msg', 'Error creating user.');
+        res.redirect('/users/requests');
     }
 });
 

@@ -31,7 +31,9 @@ module.exports = function (passport) {
                 if (err) throw err;
 
                 if (isMatch) {
-                    return done(null, user);
+                    return done(null, user, {
+                        message: 'Welcome Back, ' + user.name
+                    });
                 } else {
                     return done(null, false, {
                         message: 'Incorrect Password'

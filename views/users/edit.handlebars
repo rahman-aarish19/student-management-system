@@ -1,6 +1,6 @@
 <div class="container-fluid">
-    <form action="/users/signup" method="POST" class="form-edit-user">
-
+    <form action="/users/edit/{{result.id}}?_method=PUT" method="POST" class="form-edit-user">
+        <input type="hidden" name="_method" value="PUT">
         {{#each errors}}
         <div class="alert alert-danger alert-dismissible fade show custom-alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="">
@@ -53,30 +53,58 @@
                 </select>
             </div>
         </div>
+
+        <h5>Access Privileges</h5>
+        <hr>
+
         <div class="form-row">
-            <div class="form-group col-md-12 text-center">
-                <label for="Password">Access Level</label><br>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="r" id="inlineCheckbox" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox">Read Only Access</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="r" id="inlineCheckbox2" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox2">Read and Write Access</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="r" id="inlineCheckbox3" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox3">Read, Write and Delete Access</label>
-                </div>
+            <div class="form-group col-md-3">
+                <label for="">Create</label>
+                <select name="create" class="form-control custom-select">
+                    {{#select result.privileges.create}}
+                    <option value="">Choose...</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                    {{/select}}
+                </select>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="">Read</label>
+                <select name="read" class="form-control custom-select">
+                    {{#select result.privileges.read}}
+                    <option value="">Choose...</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                    {{/select}}
+                </select>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="">Update</label>
+                <select name="update" class="form-control custom-select">
+                    {{#select result.privileges.update}}
+                    <option value="">Choose...</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                    {{/select}}
+                </select>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="">Delete</label>
+                <select name="delete" class="form-control custom-select">
+                    {{#select result.privileges.delete}}
+                    <option value="">Choose...</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                    {{/select}}
+                </select>
             </div>
         </div>
 
         <div class="form-row">
             <button type="submit" class="btn btn-default btn-lg btn-block" style="margin-bottom:10px;">Edit User</button>
-            <!--p class="m-auto">OR</p>
-        <a href="#" class="google-signin">
-            <img src="/img/g-signin.svg" alt="">&nbsp; Sign in with Google
-        </a-->
         </div>
     </form>
 </div>

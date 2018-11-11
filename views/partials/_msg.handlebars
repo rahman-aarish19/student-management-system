@@ -31,6 +31,23 @@
     </div>
     {{/if}}
 
+    {{#if success}}
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-top:-6px;">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="media">
+            <i class="fa fa-check-square-o fa-3x m-auto" aria-hidden="true"></i>
+            <div class="media-body ml-4">
+                <h5 class="mt-0">
+                    <strong>{{success}}</strong>
+                </h5>
+                You're logged in successfully, now you can continue.
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
     <!--
     {{#if error}}
     <div class="alert alert-denger">

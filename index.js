@@ -39,7 +39,8 @@ const {
 } = require('./helpers/customHelpers');
 
 const {
-    ensureAuthenticated
+    ensureAuthenticated,
+    isLoggedIn
 } = require('./helpers/auth');
 
 // Express Handlebars Middleware.
@@ -90,13 +91,22 @@ app.use(function (req, res, next) {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
+    res.locals.success = req.flash('success');
     res.locals.user = req.user || null;
-    //res.locals.isAdmin = req.user.isAdmin || null;
     next();
 });
 
 // Home Route
-app.get('/', [ensureAuthenticated], (req, res) => {
+app.get('/', [isLoggedIn], (req, res) => {
+    res.render('home', {
+        title: 'Welcome',
+        breadcrumbs: false,
+        layout: 'home'
+    });
+});
+
+// Dashboard Route
+app.get('/dashboard', [ensureAuthenticated], (req, res) => {
     //console.log(req.originalUrl);
     res.render('dashboard', {
         title: 'Dashboard',

@@ -270,6 +270,22 @@ input[type="date"] {
     box-shadow: none;
 }
 
+.dropdown-menu {
+    border-radius: 0px;
+    background: #fff;
+    margin-top: -10px;
+}
+
+.dropdown-menu a {
+    color: #000;
+}
+
+.dropdown-menu a:hover {
+    background: #88cc00;
+    color: #fff;
+    transition: all 0.3s;
+}
+
 /* Dropdown 
 .dropdown-menu {
     border-radius: 0px;
@@ -364,7 +380,7 @@ a.btn-success:active {
 a.btn-outline-secondary {
     border-radius: 0px;
     height: 45px;
-    width: 90px;
+    width: 190px;
     padding-top: 13px;
     border: 1px solid #fff;
     color: #fff;
@@ -378,6 +394,13 @@ a.btn-outline-secondary:focus {
     color: #000;
     border-color: #fff;
     transition: all 0.5s;
+}
+
+.sidebar-nav a.btn-danger {
+    width: 200px;
+    height: 50px;
+    margin: 0 auto;
+    padding-top: 15px;
 }
 
 .breadcrumb {
@@ -1095,7 +1118,8 @@ ul#menu li a {
     }
 }
 
-.bootbox-class {
+.bootbox-class,
+.bootbox-prompt {
     /*margin-top: 300px;*/
     background: rgba(0, 0, 0, 0.6);
 }
@@ -1114,6 +1138,26 @@ ul#menu li a {
 
 .bootbox-class .btn-modal {
     width: 100px;
+}
+
+.bootbox-prompt .modal-content {
+    border: none;
+    background: red;
+    border-radius: 4px;
+    color: #fff;
+    margin-top: 300px;
+}
+
+.bootbox-prompt .modal-footer {
+    background: red;
+    border-radius: 4px;
+    border: none;
+}
+
+.bootbox-prompt button {
+    background: #fff;
+    color: red;
+    border: none;
 }
 
 /* Users */
@@ -1281,13 +1325,16 @@ a#menu-toggle {
 
 .sidebar-nav>.sidebar-brand a {
     color: #000;
-    font-weight: 800;
     font-size: 20px;
 }
 
 .sidebar-nav>.sidebar-brand a:hover {
     color: #000;
     background: none;
+}
+
+.sidebar-nav li.sidebar-brand a:hover {
+    border-left: none !important;
 }
 
 @media(min-width:768px) {
@@ -1316,4 +1363,31 @@ a#menu-toggle {
         position: relative;
         margin-right: 0;
     }
+}
+
+/* Cover Page */
+.cover-container {
+    max-width: 82em;
+}
+
+
+/*
+   * Cover
+   */
+.cover {
+    padding: 100px 1.5rem;
+    text-align: center;
+}
+
+.cover .btn-lg {
+    padding: .75rem 1.25rem;
+    font-weight: 700;
+}
+
+.cover .btn-secondary,
+.cover .btn-success {
+    width: 200px;
+    height: 50px;
+    padding-top: 14px;
+    border-radius: 2px;
 }
