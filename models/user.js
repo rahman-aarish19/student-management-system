@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     },
     isAdmin: {
         type: Boolean,
-        required: true
+        default: false
     },
     privileges: {
         read: {
@@ -60,7 +60,7 @@ function validateUser(user) {
         password: Joi.string().required().label(' Password '),
         password2: Joi.string().required().label(' Confirm Password '),
         role: Joi.string().required().label(' User Role '),
-        isAdmin: Joi.boolean().required().label(' isAdmin ')
+        //isAdmin: Joi.boolean().required().label(' isAdmin ')
     }
 
     return Joi.validate(user, schema);

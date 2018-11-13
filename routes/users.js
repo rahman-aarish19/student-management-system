@@ -141,6 +141,11 @@ router.post('/signup', isLoggedIn, async (req, res) => {
 // Protected Routes.
 
 router.get('/', [ensureAuthenticated, isAdmin], async (req, res) => {
+
+    const n = await User.find({
+        request: false
+    }).countDocuments();
+
     const users = await User.find({
         request: true
     }).select({
@@ -160,7 +165,8 @@ router.get('/', [ensureAuthenticated, isAdmin], async (req, res) => {
         res.render('users/index', {
             title: 'Users',
             breadcrumbs: true,
-            users: users
+            users: users,
+            n: n
         });
     } else {
         res.render('users/index', {
@@ -234,17 +240,15 @@ router.delete('/requests/:id', [ensureAuthenticated, isAdmin, deleteAccessContro
 
 
 // Edit User Account.
-router.get('/edit', [ensureAuthenticated, isAdmin, updateAccessControl], async (req, res) => {
+router.get('/edit/:id', [ensureAuthenticated, isAdmin, updateAccessControl], async (req, res) => {
     const result = await User.findOne({
-        _id: req.query.id
+        _id: req.params.id
     });
 
     if (result) {
-        res.render('users/edit', {
-            title: 'Edit User',
-            breadcrumbs: true,
-            result: result
-        });
+        res.send(result);
+    } else {
+        res.status(400).send('Resource not found...');
     }
 });
 
@@ -265,11 +269,13 @@ router.put('/edit/:id', [ensureAuthenticated, isAdmin, updateAccessControl], asy
     });
 
     if (result) {
-        req.flash('success_msg', 'User account created successfully.');
-        res.redirect('/users/requests');
+        req.flash('success_msg', 'User account updated successfully.');
+        res.json('/users');
+        //res.redirect('/users/requests');
     } else {
         req.flash('error_msg', 'Error creating user.');
-        res.redirect('/users/requests');
+        //res.redirect('/users/requests');
+        res.status(500).json('/users');
     }
 });
 

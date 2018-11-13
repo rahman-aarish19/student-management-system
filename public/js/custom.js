@@ -45,6 +45,9 @@ function alertMsg(message) {
     });
 }
 
+
+// AJAX Methods.
+
 $(document).ready(function () {
     $('#btnGroup').hide();
     $('#btnDel').hide();
@@ -103,7 +106,7 @@ $(document).ready(function () {
             },
             className: 'bootbox-class',
             callback: function (result) {
-                if (result == true && access_id == true) {
+                if (result == true) {
                     const URL = id;
                     $.ajax({
                         type: 'DELETE',
@@ -114,12 +117,10 @@ $(document).ready(function () {
                             //console.log(response);
                         },
                         error: function (err) {
-                            console.log(err);
+                            //console.log(err);
+                            alertMsg('Insufficient credientials.');
                         }
                     });
-                } else {
-                    //alert('You do not have the necessary permissions to perform this action.');
-                    alertMsg('You do not have the necessary permissions to perform this action.');
                 }
             }
         });

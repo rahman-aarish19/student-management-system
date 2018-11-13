@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12">
                 <label for="designation">Profile</label>
                 <select name="role" class="form-control custom-select">
                     {{#select body.role}}
@@ -40,16 +40,6 @@
                     <option value="Teacher">Teacher</option>
                     <option value="Principal">Principal</option>
                     <option value="Accountant">Accountant</option>
-                    {{/select}}
-                </select>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="name">Is Admin</label>
-                <select name="isAdmin" class="form-control custom-select">
-                    {{#select body.isAdmin}}
-                    <option value="">Choose...</option>
-                    <option value="true">True</option>
-                    <option value="false">False</option>
                     {{/select}}
                 </select>
             </div>

@@ -12,6 +12,10 @@ const {
     Course
 } = require('../models/course');
 
+const {
+    User
+} = require('../models/user');
+
 router.get('/getStudentInfo', async (req, res) => {
     const studentInfo = await Student.findOne({
         'StudentId.ClassRollNo': req.query.studentRollNo
@@ -49,6 +53,18 @@ router.get('/get-courses', async (req, res) => {
         res.send(courses);
     } else {
         res.status(400).send('Resourse not found...');
+    }
+});
+
+router.get('/users/:id', async (req, res) => {
+    const getUser = await User.findOne({
+        _id: req.params.id
+    });
+
+    if (getUser) {
+        res.send(getUser);
+    } else {
+        res.status(400).send('Resource not found...');
     }
 });
 

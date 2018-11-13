@@ -38,6 +38,12 @@ body {
     border-radius: 0px;
 }
 
+.modal-content button {
+    width: 150px;
+    height: 50px;
+    border: none;
+}
+
 .modal-header {
     background: #f9fbe7;
     color: #000;
