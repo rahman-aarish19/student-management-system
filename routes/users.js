@@ -141,14 +141,14 @@ router.post('/signup', isLoggedIn, async (req, res) => {
 // Protected Routes.
 
 router.get('/', [ensureAuthenticated, isAdmin], async (req, res) => {
-
-    const n = await User.find({
-        request: false
-    }).countDocuments();
+    let pendingRequests = 0;
+    const perPage = 5;
+    const page = req.query.page || 1;
+    const skip = ((perPage * page) - perPage);
 
     const users = await User.find({
         request: true
-    }).select({
+    }).skip(skip).limit(perPage).select({
         name: 1,
         email: 1,
         role: 1,
@@ -162,11 +162,31 @@ router.get('/', [ensureAuthenticated, isAdmin], async (req, res) => {
     });
 
     if (users) {
-        res.render('users/index', {
-            title: 'Users',
-            breadcrumbs: true,
-            users: users,
-            n: n
+        const pages = await User.where({
+            'request': true
+        }).countDocuments();
+
+        // const pendingRequests = await User.where({
+        //     'request': false
+        // }).countDocuments();
+
+        User.find({
+            request: false
+        }).then(user => {
+            if (user) {
+                pendingRequests = Object.keys(user).length;
+                
+                res.render('users/index', {
+                    title: 'Users',
+                    breadcrumbs: true,
+                    users: users,
+                    pendingRequests: pendingRequests,
+                    current: parseInt(page),
+                    pages: Math.ceil(pages / perPage)
+                });
+            }
+        }).catch(err => {
+            console.log(err);
         });
     } else {
         res.render('users/index', {
@@ -187,7 +207,8 @@ router.delete('/:id', [ensureAuthenticated, isAdmin, deleteAccessControl], async
     }
 });
 
-router.get('/requests', [ensureAuthenticated, isAdmin], async (req, res) => {
+// User Registration Requests.
+router.get('/requests', [ensureAuthenticated, isAdmin, readAccessControl], async (req, res) => {
     const requests = await User.find({
         request: false
     });
@@ -225,24 +246,35 @@ router.put('/requests/:id', [ensureAuthenticated, isAdmin, updateAccessControl],
 });
 
 router.delete('/requests/:id', [ensureAuthenticated, isAdmin, deleteAccessControl], async (req, res) => {
-    const result = await User.deleteOne({
-        _id: req.params.id
-    });
+    try {
+        const result = await User.remove({
+            _id: req.params.id
+        });
 
-    if (result) {
-        req.flash('success_msg', 'Request deleted successfully!');
-        res.send('/users/requests');
-    } else {
-        req.flash('error_msg', 'Opps! Something went wrong.');
-        res.redirect('/users/requests');
+        if (result) {
+            req.flash('success_msg', 'Request deleted successfully!');
+            res.send('/users/requests');
+        } else {
+            req.flash('error_msg', 'Opps! Something went wrong.');
+            res.redirect('/users/requests');
+        }
+    } catch (ex) {
+        console.log(ex);
     }
 });
 
 
 // Edit User Account.
+
 router.get('/edit/:id', [ensureAuthenticated, isAdmin, updateAccessControl], async (req, res) => {
     const result = await User.findOne({
         _id: req.params.id
+    }).select({
+        name: 1,
+        email: 1,
+        role: 1,
+        isAdmin: 1,
+        privileges: 1
     });
 
     if (result) {

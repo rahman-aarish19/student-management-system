@@ -1,7 +1,7 @@
 function findUser(id) {
     $.ajax({
         type: 'GET',
-        url: id,
+        url: `/users/edit/${id}`,
         success: function (response) {
             document.getElementById('_id').value = response._id;
             document.getElementById('name').value = response.name;

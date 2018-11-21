@@ -14,10 +14,20 @@ const {
     Department
 } = require('../models/department');
 
-// Students Home Route
-router.get('/', async (req, res) => {
+const {
+    ensureAuthenticated,
+    isAdmin,
+    isLoggedIn,
+    createAccessControl,
+    readAccessControl,
+    updateAccessControl,
+    deleteAccessControl
+} = require('../helpers/auth');
 
-    const perPage = 10;
+// Students Home Route
+router.get('/', [ensureAuthenticated, isAdmin], async (req, res) => {
+
+    const perPage = 7;
     const page = req.query.page || 1;
     const skip = ((perPage * page) - perPage) + 1;
     //const sortParam = req.query.session || "2013-2016";
@@ -58,7 +68,7 @@ router.get('/', async (req, res) => {
 
 
 // Student Detail's Route
-router.get('/details', async (req, res) => {
+router.get('/details', [ensureAuthenticated, isAdmin, readAccessControl], async (req, res) => {
     const student = await Student.findOne({
         _id: req.query.id
     });
@@ -75,7 +85,7 @@ router.get('/details', async (req, res) => {
 });
 
 // Search Student Route.
-router.post('/', async (req, res) => {
+router.post('/', [ensureAuthenticated, isAdmin], async (req, res) => {
     let key = req.body.searchInput;
 
     const student = await Student.find({
@@ -96,7 +106,7 @@ router.post('/', async (req, res) => {
 });
 
 // Add Student Form Route
-router.get('/add', async (req, res) => {
+router.get('/add', [ensureAuthenticated, isAdmin, createAccessControl], async (req, res) => {
     const dept = await Department.find();
 
     if (dept) {
@@ -109,7 +119,7 @@ router.get('/add', async (req, res) => {
 });
 
 // Process Students Form Data And Insert Into Database.
-router.post('/add', async (req, res) => {
+router.post('/add', [ensureAuthenticated, isAdmin, createAccessControl], async (req, res) => {
     const dept = await Department.find();
 
     //let dateOfAdmission = moment(req.body.DateOfAdmission).format('L');
@@ -209,7 +219,7 @@ router.post('/add', async (req, res) => {
 });
 
 // Student Edit Form
-router.get('/edit', async (req, res) => {
+router.get('/edit', [ensureAuthenticated, isAdmin, updateAccessControl], async (req, res) => {
     const student = await Student.findOne({
         _id: req.query.id
     });
@@ -224,7 +234,7 @@ router.get('/edit', async (req, res) => {
 });
 
 // Student Update Route
-router.put('/:id', async (req, res) => {
+router.put('/:id', [ensureAuthenticated, isAdmin, updateAccessControl], async (req, res) => {
 
     const {
         error
@@ -274,7 +284,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [ensureAuthenticated, isAdmin, deleteAccessControl], async (req, res) => {
     const result = await Student.remove({
         _id: req.params.id
     });
@@ -316,7 +326,7 @@ router.delete('/multiple/:id', async (req, res) => {
     //console.log(str);
 });
 
-router.delete('/details/:id', async (req, res) => {
+router.delete('/details/:id', [ensureAuthenticated, isAdmin, deleteAccessControl], async (req, res) => {
     const result = await Student.remove({
         _id: req.params.id
     });

@@ -38,10 +38,28 @@ body {
     border-radius: 0px;
 }
 
-.modal-content button {
+.modal-dialog {
+    width: 700px;
+}
+
+.modal-content .btn-primary,
+.modal-content .btn-secondary {
     width: 150px;
     height: 50px;
     border: none;
+}
+
+.modal-content .btn-primary {
+    background: #7CBB00;
+    border-color: #7CBB00;
+}
+
+.modal-content .btn-primary:hover,
+.modal-content .btn-primary:focus,
+.modal-content .btn-primary:active {
+    background: #88cc00;
+    border: #88cc00;
+    box-shadow: none;
 }
 
 .modal-header {
@@ -773,8 +791,8 @@ tbody::-webkit-scrollbar-thumb {
 /* Snackbar Alert */
 .alert-denger,
 .alert-success {
-    min-width: 420px;
-    max-width: 420px;
+    min-width: 400px;
+    max-width: 400px;
     height: auto;
     margin-left: -125px;
     color: #fff;
@@ -783,7 +801,7 @@ tbody::-webkit-scrollbar-thumb {
     padding: 16px;
     position: fixed;
     z-index: 2;
-    left: 15%;
+    left: 10%;
     bottom: 30px;
     border: none;
     -webkit-box-shadow: 0px 4px 15px -5px rgba(0, 0, 0, 0.3);
@@ -1130,6 +1148,10 @@ ul#menu li a {
     background: rgba(0, 0, 0, 0.6);
 }
 
+.bootbox-class .modal-dialog {
+    width: 450px;
+}
+
 .bootbox-class .modal-content {
     /*background: #f9fbe7;*/
     background: #fff;
@@ -1137,9 +1159,23 @@ ul#menu li a {
     margin-top: 300px;
 }
 
+.bootbox-class .modal-header {
+    height: 50px;
+    text-align: left;
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 10px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
 .bootbox-class .modal-footer {
     background: #fff;
     border: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: center !important;
 }
 
 .bootbox-class .btn-modal {
@@ -1194,27 +1230,13 @@ ul#menu li a {
 }
 
 .card-request button[type="submit"] {
-    width: 48px;
-    height: 43px;
-    border: none;
+    width: 50px;
+    height: 44px;
 }
 
-.form-edit-user {
-    background: #fff;
-    width: 800px;
-    margin: 50px auto;
-    padding: 40px 40px;
-}
-
-.form-edit-user button[type="submit"] {
-    height: 55px;
-    background: #7CBB00;
-    color: #fff;
-    border-radius: 0px;
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -webkit-transition: 0.2s all;
-    transition: 0.2s all;
+.card-request button[type="button"] {
+    width: 50px;
+    height: 45px;
 }
 
 /* Sidebar */

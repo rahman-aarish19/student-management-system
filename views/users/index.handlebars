@@ -8,7 +8,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <h5 class="mt-0">User Registration Requests</h5>
-                            There are {{n}} user registration requests pending.
+                            There are {{pendingRequests}} user registration requests pending.
                         </div>
                         <div class="col-md-4">
                             <a href="/users/requests">
@@ -51,8 +51,7 @@
                             <i class="fa fa-ellipsis-v"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right animated fadeIn">
-                            <a id="find-item" class="dropdown-item select-item" data-id="/users/edit/{{id}}" href="#"
-                                onclick="findUser('/users/edit/{{id}}');">Edit</a>
+                            <a class="dropdown-item select-item" href="#" onclick="findUser('{{id}}');">Edit</a>
                             <a id="delete-item" class="dropdown-item delete-item" data-id="/users/{{id}}" href="#">Delete</a>
                         </div>
                     </div>
@@ -145,14 +144,20 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" onclick="updateUser();" class="btn btn-primary updateUser" data-id="">Save
-                            changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel &nbsp;<i class="fa fa-times"></i></button>
+                        <button type="button" onclick="updateUser();" class="btn btn-primary updateUser" data-id="">Update
+                            User &nbsp;<i class="fa fa-pencil"></i></button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <br>
+
+    <ul class="pagination">
+        {{#paginate current=current pages=pages}} {{/paginate}}
+    </ul>
 
     <!-- Checking UPDATE & DELETE Access Privileges -->
 

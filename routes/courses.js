@@ -34,16 +34,24 @@ router.get('/getCourse/:deptName', async (req, res) => {
 
 router.get('/', [ensureAuthenticated, isAdmin, readAccessControl], async (req, res) => {
 
+    const perPage = 8;
+    const page = req.query.page || 1;
+    const skip = ((perPage * page) - perPage);
+
     const dept = await Department.find();
-    const course = await Course.find();
+    const course = await Course.find().skip(skip).limit(perPage);
 
     if (dept && course) {
+        const pages = await Course.find().countDocuments();
+
         res.render('courses/index', {
             title: 'Courses',
             breadcrumbs: true,
             search_bar: true,
             dept: dept,
-            course: course
+            course: course,
+            current: parseInt(page),
+            pages: Math.ceil(pages / perPage)
         });
     } else if (dept) {
         res.render('courses/index', {

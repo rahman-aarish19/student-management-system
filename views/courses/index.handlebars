@@ -35,7 +35,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="dropdown-item delete-item" data-id="/courses/{{id}}">Delete</a>
+                                <a href="#" class="dropdown-item" onclick="deleteItem('/courses/{{id}}');">Delete</a>
                             </li>
                         </div>
                     </div>
@@ -44,6 +44,12 @@
             {{/each}}
         </tbody>
     </table>
+
+    <br>
+
+    <ul class="pagination">
+        {{#paginate current=current pages=pages}} {{/paginate}}
+    </ul>
 
     <!--table class="table custom-tables table-striped table-sm">
         <thead class="thead-dark">

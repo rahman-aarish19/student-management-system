@@ -51,7 +51,7 @@
                     <a href="/students/edit?id={{student.id}}" class="btn btn-secondary">
                         <i class="fa fa-pencil"></i>Edit &nbsp;
                     </a>
-                    <a href="#" class="btn btn-danger delete-item" data-id="/students/{{student.id}}">
+                    <a href="#" class="btn btn-danger" onclick="deleteItem('/students/{{student.id}}');">
                         <i class="fa fa-trash"></i>&nbsp; Delete
                     </a>
                     <!--form action="/students/details/{{student.id}}?_method=DELETE" method="POST">
@@ -333,7 +333,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnPrints" onclick="printPage('printPreview');" class="btn btn-secondary">
+                <button type="button" id="btnPrints" class="btn btn-secondary">
                     <i class="fa fa-print fa-lg"></i> &nbsp; Print Page
                 </button>
             </div>
