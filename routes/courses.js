@@ -87,8 +87,6 @@ router.post('/add', [ensureAuthenticated, isAdmin, createAccessControl], async (
     } = validateCourse(req.body);
 
     if (error) {
-        //req.flash('error_msg', error.details[0].message);
-        //res.redirect('/courses');
 
         errors.push({
             text: error.details[0].message
@@ -123,7 +121,6 @@ router.post('/add', [ensureAuthenticated, isAdmin, createAccessControl], async (
             }
         } catch (ex) {
             for (field in ex.errors) {
-                //req.flash('error_msg', ex.errors[field].message);
                 errors.push({
                     text: ex.errors[field].message
                 });
@@ -135,8 +132,6 @@ router.post('/add', [ensureAuthenticated, isAdmin, createAccessControl], async (
                 body: req.body,
                 dept: dept
             });
-
-            //res.redirect('/courses');
         }
     }
 });

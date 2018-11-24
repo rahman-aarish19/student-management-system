@@ -166,10 +166,6 @@ router.get('/', [ensureAuthenticated, isAdmin], async (req, res) => {
             'request': true
         }).countDocuments();
 
-        // const pendingRequests = await User.where({
-        //     'request': false
-        // }).countDocuments();
-
         User.find({
             request: false
         }).then(user => {
@@ -303,10 +299,8 @@ router.put('/edit/:id', [ensureAuthenticated, isAdmin, updateAccessControl], asy
     if (result) {
         req.flash('success_msg', 'User account updated successfully.');
         res.json('/users');
-        //res.redirect('/users/requests');
     } else {
         req.flash('error_msg', 'Error creating user.');
-        //res.redirect('/users/requests');
         res.status(500).json('/users');
     }
 });

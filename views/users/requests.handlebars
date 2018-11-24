@@ -21,9 +21,6 @@
                         <button type="submit" class="btn btn-default select-item" data-toggle="tooltip" title="Approve"><i
                                 class="fa fa-check fa-lg"></i></button>
                     </form>
-                    <!--a href="#" class="btn btn-danger delete-item" data-id="/users/requests/{{id}}">
-                        <i class="fa fa-trash-o fa-lg"></i>
-                    </a-->
                     <button type="button" class="btn btn-danger" onclick="deleteItem('/users/requests/{{id}}');">
                         <i class="fa fa-trash-o fa-lg"></i>
                     </button>
@@ -49,7 +46,7 @@
 
     {{#unless user.privileges.delete}}
     <script>
-        let items = document.getElementsByClassName("btn-danger delete-item"), i;
+        let items = document.getElementsByClassName("btn-danger"), i;
 
         for (i = 0; i < items.length; i++) {
             items[i].style.display = 'none';

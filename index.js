@@ -35,7 +35,8 @@ mongoose.connect('mongodb://localhost:27017/student-mgmt-sys', {
 const {
     paginate,
     select,
-    if_eq
+    if_eq,
+    select_course
 } = require('./helpers/customHelpers');
 
 const {
@@ -50,7 +51,8 @@ app.engine('handlebars', exphbs({
     helpers: {
         paginate: paginate,
         select: select,
-        if_eq: if_eq
+        if_eq: if_eq,
+        select_course: select_course
     }
 }));
 
@@ -132,7 +134,7 @@ app.use('/fee-management', fees);
 app.use('/api', api);
 app.use('/uploads', uploads);
 
-// Listening on Port:3000
+// Listening on Port:5000
 //const port = process.env.port || 3000;
 const port = process.env.NODE_ENV || 5000;
 app.set('port', port);

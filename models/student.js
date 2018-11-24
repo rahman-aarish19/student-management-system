@@ -100,7 +100,7 @@ const studentSchema = new mongoose.Schema({
             required: true
         },
         PostalCode: {
-            type: Number,
+            type: String,
             required: true
         },
         Country: {
@@ -153,7 +153,7 @@ function validateStudent(student) {
         MothersEducationalQualification: Joi.string().required(),
         MothersOccupation: Joi.string().required(),
         Email: Joi.string().email().required(),
-        PhoneNumber: Joi.number().required(),
+        PhoneNumber: Joi.number().integer().positive().required(),
         Address: Joi.string().required(),
         City: Joi.string().required(),
         State: Joi.string().required(),

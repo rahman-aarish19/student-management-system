@@ -182,7 +182,6 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="">Course Name ( <span>*</span> )</label>
-                    <!--input type="text" name="CourseName" value="{{body.CourseName}}" class="form-control" placeholder="Enter Course Name"-->
                     <select name="CourseName" id="chooseDept" class="form-control custom-select" onchange="getCourses(this.value);">
                         <option value="">Choose...</option>
                         {{#each dept}}
@@ -192,12 +191,12 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="">Branch / Specialization ( <span>*</span> )</label>
-                    <!--input type="text" name="BranchName" value="{{body.BranchName}}" class="form-control" placeholder="Enter Course Name"-->
                     <select name="BranchName" id="course" class="form-control custom-select">
                         <option value="">Choose...</option>
                     </select>
                 </div>
             </div>
+            
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="Class">Class Admitted To ( <span>*</span> )</label>

@@ -4,11 +4,6 @@ module.exports = {
             return next();
         }
 
-        /*res.render('errors', {
-            title: '401 - Unauthenticated',
-            message: '401 - Unauthenticated',
-            description: 'You don\'nt have the necessary credentials to access this resource. To access this resource you need to provide a valid credentials.'
-        });*/
         req.flash('error_msg', 'You must login first');
         res.redirect('/users/signin');
     },

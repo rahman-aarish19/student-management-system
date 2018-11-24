@@ -43,5 +43,18 @@ module.exports = {
         } else {
             return opts.inverse(this);
         }
+    },
+    select_course: function (dept, selected) {
+        //let courseName = document.getElementById('chooseDept');
+        let output = '';
+
+        for (let i = 0; i < dept.length; i++) {
+            if (dept[i].dname == selected) {
+                output += `<option value="${dept[i].dname}" selected>${dept[i].dname}</option>`;
+            } else {
+                output += `<option value="${dept[i].dname}">${dept[i].dname}</option>`;
+            }
+        }
+        return output;
     }
 }

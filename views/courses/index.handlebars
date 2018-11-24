@@ -10,7 +10,7 @@
                 <th scope="col">Ends</th>
                 <th scope="col">Course Fee</th>
                 <th scope="col">Intake</th>
-                <th scope="col">Action</th>
+                <th scope="col" id="hide-item">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -23,18 +23,18 @@
                 <td>{{endDate}}</td>
                 <td>{{courseFee}}</td>
                 <td>{{intake}}</td>
-                <td>
+                <td class="hide-element">
                     <div class="dropdown" id="customized-dropdown">
                         <button type="button" class="btn btn-default" data-toggle="dropdown">
                             <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right animated fadeIn">
-                            <li>
+                            <li class="edit-item">
                                 <a class="dropdown-item" href="/courses/edit?id={{id}}">
                                     Edit
                                 </a>
                             </li>
-                            <li>
+                            <li class="del-item">
                                 <a href="#" class="dropdown-item" onclick="deleteItem('/courses/{{id}}');">Delete</a>
                             </li>
                         </div>
@@ -51,56 +51,32 @@
         {{#paginate current=current pages=pages}} {{/paginate}}
     </ul>
 
-    <!--table class="table custom-tables table-striped table-sm">
-        <thead class="thead-dark">
-            <tr>
-                <th class="col-width-15" style="padding-left:20px;">Course Name</th>
-                <th class="col-width-15">Department</th>
-                <th class="col-width-10">Course Duration</th>
-                <th class="col-width-10">Starts</th>
-                <th class="col-width-10">Ends</th>
-                <th class="col-width-10">Course Fees</th>
-                <th class="col-width-5">Intake</th>
-                <th class="col-width-5">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each course}}
-            <tr>
-                <td class="col-width-15">&nbsp;&nbsp; {{courseName}}</td>
-                <td class="col-width-15">{{departmentName}}</td>
-                <td class="col-width-10">{{courseDuration}} &nbsp;years</td>
-                <td class="col-width-10">{{startDate}}</td>
-                <td class="col-width-10">{{endDate}}</td>
-                <td class="col-width-10">{{courseFee}} &nbsp; &#8377</td>
-                <td class="col-width-5">{{intake}}</td>
-                <td class="col-width-5">
-                    <div id="dropdown-custom" class="dropdown">
-                        <button type="button" class="btn btn-default btn-block" data-toggle="dropdown">
-                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right animated fadeIn">
-                            <li>
-                                <a class="dropdown-item" href="/courses/edit?id={{id}}">
-                                    Edit
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-item delete-item" data-id="/courses/{{id}}">Delete</a>
-                                <!--form class="btn-delete" action="/courses/{{id}}?_method=DELETE" method="POST">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="dropdown-item">
-                                        Delete
-                                    </button>
-                                </form>
-                            </li>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table-->
+    {{#unless user.privileges.update}}
+    <script>
+        let updateItems = document.getElementsByClassName('edit-item'), count;
+        let hideItems = document.getElementsByClassName('hide-element'), x;
+
+        for (count = 0; count < updateItems.length; count++) {
+            updateItems[count].style.display = 'none';
+        }
+
+        for (x = 0; x < hideItems.length; x++) {
+            hideItems[x].style.display = 'none';
+        }
+
+        document.getElementById('hide-item').style.display = 'none';
+    </script>
+    {{/unless}}
+
+    {{#unless user.privileges.delete}}
+    <script>
+        let items = document.getElementsByClassName("del-item"), i;
+
+        for (i = 0; i < items.length; i++) {
+            items[i].style.display = 'none';
+        }
+    </script>
+    {{/unless}}
 
     {{/if}}
 </div>

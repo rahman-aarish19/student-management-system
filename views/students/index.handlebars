@@ -1,7 +1,7 @@
 <div class="container-fluid" id="container-fluid">
     <div class="row mb-3">
-        <div class="col-md-8">
-            <button type="button" class="btn btn-secondary custom-button" data-toggle="modal" data-target="#importCSV">
+        <div class="col-md-10">
+            {{!-- <button type="button" class="btn btn-secondary custom-button" data-toggle="modal" data-target="#importCSV">
                 <i class="fa fa-file-text-o fa-lg"></i>&nbsp; Import from CSV
             </button>
             <button type="button" id="btnManage" class="btn btn-secondary">Manage</button>
@@ -9,7 +9,7 @@
                 <button type="button" id="left" class="btn btn-secondary">All</button>
                 <button type="button" id="right" class="btn btn-secondary">None</button>
             </div>
-            <button type="button" id="btnDel" class="btn btn-danger">Delete</button>
+            <button type="button" id="btnDel" class="btn btn-danger">Delete</button> --}}
         </div>
         <div class="col-md-2">
             <div class="dropdown">
@@ -58,17 +58,17 @@
                             <i class="fa fa-ellipsis-v"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right animated fadeIn">
-                            <li>
+                            <li class="edit-item">
                                 <a class="dropdown-item" href="/students/edit?id={{id}}">
                                     Edit
                                 </a>
                             </li>
-                            <li>
+                            <li class="view-item">
                                 <a class="dropdown-item" href="/students/details?id={{id}}">
                                     View
                                 </a>
                             </li>
-                            <li>
+                            <li class="del-item">
                                 <a href="#" class="dropdown-item" onclick="deleteItem('/students/{{id}}');">Delete</a>
                             </li>
                         </div>
@@ -79,84 +79,25 @@
         </tbody>
     </table>
 
-    <!--table class="table custom-table table-striped table-sm">
-        <thead class="thead-dark">
-            <tr>
-                <th class="col-width-5" style="padding-left:10px;">
-                    <label class="container">
-                        <input type="checkbox" id="checkall">
-                        <span class="checkmark" style="border:1px solid #eee;"></span>
-                    </label>
-                </th>
-                <th class="col-width-10" style="padding-left:20px;">Class Roll No.</th>
-                <th class="col-width-15">Name</th>
-                <th class="col-width-5">Gender</th>
-                <th class="col-width-20">Date Of Admission</th>
-                <th class="col-width-10">Phone Number</th>
-                <th class="col-width-20">Address</th>
-                <th class="col-width-10">Class Admitted To</th>
-                <th class="col-width-5">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each students}}
-            <tr>
-                <td class="col-width-5">
-                    <label class="container">
-                        <input type="checkbox" value="'{{id}}'" class="checkbox-custom">
-                        <span class="checkmark"></span>
-                    </label>
-                </td>
-                <td class="col-width-10">
-                    &nbsp;&nbsp; {{StudentId.ClassRollNo}}
-                </td>
-                <td class="col-width-15">
-                    {{StudentName.FirstName}} &nbsp; {{StudentName.LastName}}
-                </td>
-                <td class="col-width-5"> {{Gender}} </td>
-                <td class="col-width-20"> {{DateOfAdmission}} </td>
-                <td class="col-width-10">
-                    {{PhoneNumber}}
-                </td>
-                <td class="col-width-20">
-                    {{Address.Address_Line_1}}
-                </td>
-                <td class="col-width-10">
-                    {{Class}}
-                </td>
-                <td class="col-width-5">
-                    <div id="dropdown-custom" class="dropdown" style="margin-left:-10px;">
-                        <button type="button" class="btn btn-default btn-block" data-toggle="dropdown">
-                            <i class="fa fa-ellipsis-v"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right animated fadeIn">
-                            <li>
-                                <a class="dropdown-item" href="/students/edit?id={{id}}">
-                                    Edit
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/students/details?id={{id}}">
-                                    View
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-item delete-item" data-id="/students/{{id}}">Delete</a>
-                                <!--form class="btn-delete" action="/students/{{id}}?_method=DELETE" method="POST">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="dropdown-item">
-                                        Delete
-                                    </button>
-                                </form>
-                            </li>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
-    <p>Showing {{skip}} - {{to}} of {{total}}</p-->
+    {{#unless user.privileges.update}}
+    <script>
+        let updateItems = document.getElementsByClassName('edit-item'), count;
+
+        for (count = 0; count < updateItems.length; count++) {
+            updateItems[count].style.display = 'none';
+        }
+    </script>
+    {{/unless}}
+
+    {{#unless user.privileges.delete}}
+    <script>
+        let items = document.getElementsByClassName("del-item"), i;
+
+        for (i = 0; i < items.length; i++) {
+            items[i].style.display = 'none';
+        }
+    </script>
+    {{/unless}}
 
     <br>
 

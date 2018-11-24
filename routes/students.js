@@ -1,6 +1,7 @@
 const express = require('express');
 const faker = require('faker');
 const moment = require('moment');
+const randomString = require('randomstring');
 
 const router = express.Router();
 
@@ -25,12 +26,11 @@ const {
 } = require('../helpers/auth');
 
 // Students Home Route
-router.get('/', [ensureAuthenticated, isAdmin], async (req, res) => {
+router.get('/', [ensureAuthenticated, isAdmin, readAccessControl], async (req, res) => {
 
     const perPage = 7;
     const page = req.query.page || 1;
     const skip = ((perPage * page) - perPage) + 1;
-    //const sortParam = req.query.session || "2013-2016";
     const sort = req.query.sort || "asc";
 
     const student = await Student.find()
@@ -39,8 +39,6 @@ router.get('/', [ensureAuthenticated, isAdmin], async (req, res) => {
         .sort({
             Session: sort
         });
-
-    //console.log(student.length)
 
     if (student.length > 0) {
         const pages = await Student.countDocuments();
@@ -122,8 +120,6 @@ router.get('/add', [ensureAuthenticated, isAdmin, createAccessControl], async (r
 router.post('/add', [ensureAuthenticated, isAdmin, createAccessControl], async (req, res) => {
     const dept = await Department.find();
 
-    //let dateOfAdmission = moment(req.body.DateOfAdmission).format('L');
-    //let dateOfBirth = moment(req.body.DateOfBirth).format('L');
     let errors = [];
 
     const {
@@ -224,11 +220,14 @@ router.get('/edit', [ensureAuthenticated, isAdmin, updateAccessControl], async (
         _id: req.query.id
     });
 
-    if (student) {
+    const dept = await Department.find();
+
+    if (student && dept) {
         res.render('students/edit', {
             title: 'Edit Student Details',
             breadcrumbs: true,
-            student: student
+            student: student,
+            dept: dept
         });
     }
 });
@@ -241,46 +240,47 @@ router.put('/:id', [ensureAuthenticated, isAdmin, updateAccessControl], async (r
     } = validate(req.body);
 
     if (error) {
-        //res.status(400).send(error.details[0].message);
         req.flash('error_msg', error.details[0].message);
         res.redirect(`/students/edit?id=${req.params.id}`);
-    }
+    } else {
+        const student = await Student.update({
+            _id: req.params.id
+        }, {
+            $set: {
+                'StudentName.FirstName': req.body.FirstName,
+                'StudentName.LastName': req.body.LastName,
+                Gender: req.body.Gender,
+                Category: req.body.Category,
+                DateOfBirth: req.body.DateOfBirth,
+                DateOfAdmission: req.body.DateOfAdmission,
+                Religion: req.body.Religion,
+                FathersName: req.body.FathersName,
+                FathersEducationalQualification: req.body.FathersEducationalQualification,
+                FathersOccupation: req.body.FathersOccupation,
+                MothersName: req.body.MothersName,
+                MothersEducationalQualification: req.body.MothersEducationalQualification,
+                MothersOccupation: req.body.MothersOccupation,
+                Email: req.body.Email,
+                PhoneNumber: req.body.PhoneNumber,
+                'Address.Address_Line_1': req.body.Address,
+                'Address.City': req.body.City,
+                'Address.State': req.body.State,
+                'Address.PostalCode': req.body.PostalCode,
+                'Address.Country': req.body.Country,
+                CourseName: req.body.CourseName,
+                BranchName: req.body.BranchName,
+                Class: req.body.ClassAdmittedTo,
+                Section: req.body.Section,
+                Session: req.body.Session,
+                'StudentId.ClassRollNo': req.body.ClassRollNo,
+                'StudentId.RegistrationNo': req.body.RegistrationNo
+            }
+        });
 
-    const student = await Student.update({
-        _id: req.params.id
-    }, {
-        $set: {
-            'StudentName.FirstName': req.body.FirstName,
-            'StudentName.LastName': req.body.LastName,
-            Gender: req.body.Gender,
-            Category: req.body.Category,
-            DateOfBirth: req.body.DateOfBirth,
-            DateOfAdmission: req.body.DateOfAdmission,
-            Religion: req.body.Religion,
-            FathersName: req.body.FathersName,
-            FathersEducationalQualification: req.body.FathersEducationalQualification,
-            FathersOccupation: req.body.FathersOccupation,
-            MothersName: req.body.MothersName,
-            MothersEducationalQualification: req.body.MothersEducationalQualification,
-            MothersOccupation: req.body.MothersOccupation,
-            Email: req.body.Email,
-            PhoneNumber: req.body.PhoneNumber,
-            'Address.Address_Line_1': req.body.Address,
-            'Address.City': req.body.City,
-            'Address.State': req.body.State,
-            'Address.PostalCode': req.body.PostalCode,
-            'Address.Country': req.body.Country,
-            Class: req.body.ClassAdmittedTo,
-            Section: req.body.Section,
-            Session: req.body.Session,
-            'StudentId.ClassRollNo': req.body.ClassRollNo,
-            'StudentId.RegistrationNo': req.body.RegistrationNo
+        if (student) {
+            req.flash('success_msg', 'Student Details Updated Successfully.');
+            res.redirect('/students');
         }
-    });
-
-    if (student) {
-        req.flash('success_msg', 'Student Details Updated Successfully.');
-        res.redirect('/students');
     }
 });
 
@@ -295,11 +295,6 @@ router.delete('/:id', [ensureAuthenticated, isAdmin, deleteAccessControl], async
     } else {
         res.status(500).send();
     }
-    /*
-        if (result) {
-            req.flash('success_msg', 'Record deleted successfully.');
-            res.redirect('/students');
-        }*/
 });
 
 router.delete('/multiple/:id', async (req, res) => {
@@ -334,6 +329,55 @@ router.delete('/details/:id', [ensureAuthenticated, isAdmin, deleteAccessControl
     if (result) {
         req.flash('success_msg', 'Record deleted successfully.');
         res.redirect('/students');
+    }
+});
+
+// Faker
+router.get('/faker', async (req, res) => {
+    for (let i = 0; i < 10; i++) {
+        const student = new Student({
+            StudentName: {
+                FirstName: faker.name.firstName(),
+                LastName: faker.name.lastName(),
+            },
+            Gender: 'Male',
+            Category: 'General',
+            DateOfBirth: moment(faker.date.past()).format('LL'),
+            DateOfAdmission: moment(faker.date.recent()).format('LL'),
+            Religion: 'Others',
+            FathersName: faker.name.findName(),
+            FathersEducationalQualification: faker.name.jobArea(),
+            FathersOccupation: faker.name.jobTitle(),
+            MothersName: faker.name.findName(),
+            MothersEducationalQualification: faker.name.jobArea(),
+            MothersOccupation: faker.name.jobTitle(),
+            Email: faker.internet.email(),
+            PhoneNumber: faker.phone.phoneNumber(),
+            Address: {
+                Address_Line_1: `${faker.address.streetAddress()} , ${faker.address.streetName()}`,
+                City: faker.address.city(),
+                State: faker.address.state(),
+                PostalCode: faker.address.zipCode(),
+                Country: faker.address.country()
+            },
+            CourseName: 'XYZ',
+            BranchName: 'XYZ',
+            Class: '1st Semester',
+            Section: 'A',
+            Session: '2013-2016',
+            StudentId: new StudentId({
+                ClassRollNo: randomString.generate({
+                    length: 8,
+                    charset: 'numeric'
+                }),
+                RegistrationNo: randomString.generate({
+                    length: 8,
+                    charset: 'numeric'
+                })
+            }),
+        });
+
+        const result = await student.save();
     }
 });
 
