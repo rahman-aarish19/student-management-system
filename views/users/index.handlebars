@@ -52,7 +52,7 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right animated fadeIn">
                             <a class="dropdown-item select-item" href="#" onclick="findUser('{{id}}');">Edit</a>
-                            <a id="delete-item" class="dropdown-item delete-item" data-id="/users/{{id}}" href="#">Delete</a>
+                            <a id="delete-item" class="dropdown-item" onclick="deleteItem('/users/{{id}}');" href="#">Delete</a>
                         </div>
                     </div>
                 </td>
