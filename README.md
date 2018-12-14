@@ -47,7 +47,9 @@ $ nodemon
 ### Todos
 
  - Import the users.json file to the local MongoDB server.
-   $ mongoimport --db student-mgmt-sys --collection users --file users.json
+ ```sh
+$ mongoimport --db student-mgmt-sys --collection users --file users.json
+```
  - And run the application in the development mode.
 
 License
