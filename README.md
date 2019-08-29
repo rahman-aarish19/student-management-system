@@ -19,7 +19,7 @@ A Full Stack Web Application built with Node.js, Express.js, MongoDB and Bootstr
   - Marks and Grades.
   - Attendance.
 
-### Technology Stack Userd
+### Technology Stack Used
 
 This project uses a number of open source tools, technologies and frameworks to work properly:
 
