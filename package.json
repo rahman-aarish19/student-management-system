@@ -21,7 +21,7 @@
     "joi": "^13.4.0",
     "method-override": "^2.3.10",
     "moment": "^2.22.2",
-    "mongoose": "^5.2.1",
+    "mongoose": "^5.7.5",
     "mongoose-paginate": "^5.0.3",
     "multer": "^1.4.1",
     "passport": "^0.4.0",
